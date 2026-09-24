@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareerForge — Build & Go-to-Market Blueprint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14100c; --ink-2:#1b1610; --ink-3:#241d15; --ink-4:#2e261c;
+    --ember:#ff6b2c; --ember-2:#ff8a4c; --gold:#e9a83c; --lime:#8fb339;
+    --cream:#f3ebdf; --paper:#efe6d6; --muted:#a99a85; --muted-2:#7d715f;
+    --line:rgba(243,235,223,.09); --line-2:rgba(243,235,223,.16);
+    --good:#86c06a; --warn:#e9a83c; --bad:#e0654a;
+    --shadow:0 24px 60px -20px rgba(0,0,0,.7);
+    --font-d:"Fraunces",Georgia,serif; --font-b:"Archivo",system-ui,sans-serif; --font-m:"JetBrains Mono",monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink); color:var(--cream); font-family:var(--font-b);
+    font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(1100px 600px at 80% -8%, rgba(255,107,44,.10), transparent 60%),
+      radial-gradient(900px 500px at -8% 30%, rgba(233,168,60,.06), transparent 55%);
+    background-attachment:fixed;
+  }
+  ::selection{background:var(--ember);color:#1a1109}
+  a{color:var(--ember-2);text-decoration:none}
+  a:hover{color:var(--gold)}
+
+  /* ---- Layout ---- */
+  .wrap{display:grid; grid-template-columns:280px 1fr; max-width:1320px; margin:0 auto; min-height:100vh}
+  nav.side{
+    position:sticky; top:0; align-self:start; height:100vh; overflow-y:auto;
+    padding:34px 22px 40px; border-right:1px solid var(--line);
+    background:linear-gradient(180deg, var(--ink-2), rgba(20,16,12,.6));
+  }
+  nav.side::-webkit-scrollbar{width:8px} nav.side::-webkit-scrollbar-thumb{background:var(--ink-4);border-radius:8px}
+  .brand{display:flex;align-items:center;gap:11px;margin-bottom:6px}
+  .brand .mark{width:34px;height:34px;border-radius:9px;background:
+     conic-gradient(from 210deg, var(--ember), var(--gold), var(--ember-2), var(--ember));
+     display:grid;place-items:center;font-family:var(--font-d);font-weight:700;color:#1a1008;font-size:19px;box-shadow:0 6px 20px -6px rgba(255,107,44,.6)}
+  .brand h1{font-family:var(--font-d);font-size:22px;font-weight:600;letter-spacing:.2px;line-height:1}
+  .brand .sub{font-family:var(--font-m);font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--muted-2);margin-top:5px}
+  .toc{margin-top:26px;list-style:none;display:flex;flex-direction:column;gap:1px}
+  .toc a{
+    display:flex;gap:11px;align-items:baseline;color:var(--muted);font-size:13.5px;
+    padding:8px 12px;border-radius:8px;border-left:2px solid transparent;transition:.18s;
+  }
+  .toc a .n{font-family:var(--font-m);font-size:11px;color:var(--muted-2);min-width:20px}
+  .toc a:hover{background:var(--ink-3);color:var(--cream)}
+  .toc a.active{background:linear-gradient(90deg,rgba(255,107,44,.14),transparent);color:var(--cream);border-left-color:var(--ember)}
+  .toc a.active .n{color:var(--ember)}
+  .side-foot{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted-2);line-height:1.6}
+
+  main{padding:60px 68px 120px;max-width:940px}
+  @media(max-width:1000px){
+    .wrap{grid-template-columns:1fr}
+    nav.side{position:static;height:auto;border-right:none;border-bottom:1px solid var(--line)}
+    .toc{flex-direction:row;flex-wrap:wrap;gap:6px}
+    .toc a{border-left:none;border-bottom:2px solid transparent;padding:7px 10px}
+    .toc a.active{border-left:none;border-bottom-color:var(--ember)}
+    main{padding:40px 24px 90px}
+  }
+
+  /* ---- Type ---- */
+  section{padding-top:34px;margin-top:34px;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:none;margin-top:14px}
+  .eyebrow{font-family:var(--font-m);font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ember);margin-bottom:12px}
+  h2{font-family:var(--font-d);font-size:34px;font-weight:600;line-height:1.1;letter-spacing:-.5px;margin-bottom:14px}
+  h3{font-family:var(--font-d);font-size:22px;font-weight:600;margin:30px 0 12px;color:var(--paper)}
+  h4{font-family:var(--font-b);font-size:14px;font-weight:700;letter-spacing:.3px;margin:20px 0 8px;color:var(--gold);text-transform:uppercase;font-size:12.5px;letter-spacing:1.4px}
+  p{margin-bottom:14px;color:#e4d9c8}
+  strong{color:var(--cream);font-weight:600}
+  em{color:var(--gold);font-style:italic}
+  .lead{font-size:19px;line-height:1.6;color:var(--paper);font-family:var(--font-d);font-weight:400}
+  ul,ol{margin:0 0 16px 2px;padding-left:20px}
+  li{margin-bottom:9px;color:#e4d9c8}
+  li::marker{color:var(--ember)}
+  code{font-family:var(--font-m);font-size:.86em;background:var(--ink-3);padding:2px 6px;border-radius:5px;color:var(--ember-2);border:1px solid var(--line)}
+
+  /* ---- Hero ---- */
+  .hero{padding:22px 0 8px}
+  .hero h2{font-size:46px;margin-bottom:18px}
+  .hero .tagline{color:var(--ember-2)}
+  .pills{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 8px}
+  .pill{font-family:var(--font-m);font-size:11.5px;letter-spacing:.5px;padding:6px 13px;border-radius:20px;border:1px solid var(--line-2);color:var(--paper);background:var(--ink-2)}
+  .pill.hot{border-color:rgba(255,107,44,.4);color:var(--ember-2);background:rgba(255,107,44,.08)}
+
+  /* ---- Cards & callouts ---- */
+  .card{background:var(--ink-2);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin:16px 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:720px){.grid2,.grid3{grid-template-columns:1fr}}
+  .stat{background:linear-gradient(160deg,var(--ink-3),var(--ink-2));border:1px solid var(--line);border-radius:14px;padding:20px}
+  .stat .big{font-family:var(--font-d);font-size:38px;font-weight:600;color:var(--gold);line-height:1}
+  .stat .lbl{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.45}
+  .callout{border-left:3px solid var(--ember);background:linear-gradient(90deg,rgba(255,107,44,.09),transparent);padding:16px 20px;border-radius:0 12px 12px 0;margin:18px 0}
+  .callout.gold{border-left-color:var(--gold);background:linear-gradient(90deg,rgba(233,168,60,.1),transparent)}
+  .callout .tag{font-family:var(--font-m);font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--ember);display:block;margin-bottom:6px}
+  .callout.gold .tag{color:var(--gold)}
+  .moat{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}
+  .moat:last-child{border-bottom:none}
+  .moat .ic{flex-shrink:0;width:40px;height:40px;border-radius:10px;background:var(--ink-3);border:1px solid var(--line-2);display:grid;place-items:center;font-size:20px}
+  .moat h4{margin:0 0 4px;color:var(--cream);text-transform:none;letter-spacing:0;font-size:16px;font-family:var(--font-d);font-weight:600}
+  .moat p{margin:0;font-size:14.5px;color:var(--muted)}
+
+  /* ---- Tables ---- */
+  .tbl-wrap{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:12px}
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}
+  th{background:var(--ink-3);text-align:left;padding:12px 16px;font-family:var(--font-m);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:500;border-bottom:1px solid var(--line-2)}
+  td{padding:12px 16px;border-bottom:1px solid var(--line);color:#e4d9c8;vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:rgba(255,107,44,.03)}
+  td .yes{color:var(--good)} td .no{color:var(--bad)} td .mid{color:var(--warn)}
+  .mono{font-family:var(--font-m);font-size:13px}
+  .hl-row td{background:rgba(255,107,44,.07)!important}
+
+  /* ---- Phases / timeline ---- */
+  .phase{position:relative;padding:0 0 8px 34px;margin-bottom:6px}
+  .phase::before{content:"";position:absolute;left:9px;top:6px;bottom:-6px;width:2px;background:var(--line-2)}
+  .phase:last-child::before{display:none}
+  .phase .dot{position:absolute;left:0;top:2px;width:20px;height:20px;border-radius:50%;background:var(--ink);border:2px solid var(--ember);display:grid;place-items:center;font-family:var(--font-m);font-size:10px;color:var(--ember);font-weight:700}
+  .phase .when{font-family:var(--font-m);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted-2)}
+  .phase h3{margin:2px 0 6px;font-size:19px}
+  .phase p{font-size:14.5px;margin-bottom:8px}
+  .phase ul{margin-bottom:14px}
+  .phase li{font-size:14px;margin-bottom:6px}
+
+  .kbd{font-family:var(--font-m);font-size:12px;background:var(--ink-4);border:1px solid var(--line-2);border-bottom-width:2px;border-radius:6px;padding:2px 7px;color:var(--paper)}
+  .prompt-box{background:#0e0b08;border:1px solid var(--line-2);border-radius:12px;padding:18px 20px;margin:14px 0;font-family:var(--font-m);font-size:13px;line-height:1.7;color:#cdbfa8;position:relative;overflow-x:auto}
+  .prompt-box .lbl{position:absolute;top:0;right:0;background:var(--ember);color:#1a1008;font-size:10px;letter-spacing:1.5px;padding:3px 10px;border-radius:0 11px 0 10px;text-transform:uppercase;font-weight:700}
+  .prompt-box b{color:var(--gold);font-weight:500}
+  .divider-note{font-size:13px;color:var(--muted-2);font-style:italic;margin-top:6px}
+  .foot{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);font-size:13px;color:var(--muted-2)}
+  .tick{color:var(--good);font-weight:700} .cross{color:var(--bad)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ SIDEBAR ============ -->
+  <nav class="side">
+    <div class="brand">
+      <div class="mark">C</div>
+      <div>
+        <h1>CareerForge</h1>
+        <div class="sub">Build Blueprint</div>
+      </div>
+    </div>
+    <ul class="toc">
+      <li><a href="#opportunity"><span class="n">01</span> The Opportunity</a></li>
+      <li><a href="#landscape"><span class="n">02</span> Competitive Landscape</a></li>
+      <li><a href="#product"><span class="n">03</span> Product Definition</a></li>
+      <li><a href="#moat"><span class="n">04</span> Standout Features</a></li>
+      <li><a href="#stack"><span class="n">05</span> Tech Stack</a></li>
+      <li><a href="#buildplan"><span class="n">06</span> Build Plan</a></li>
+      <li><a href="#workflow"><span class="n">07</span> Claude&nbsp;+&nbsp;Gemini Workflow</a></li>
+      <li><a href="#economics"><span class="n">08</span> Unit Economics</a></li>
+      <li><a href="#pricing"><span class="n">09</span> Pricing &amp; Money</a></li>
+      <li><a href="#gtm"><span class="n">10</span> Marketing Angles</a></li>
+      <li><a href="#risks"><span class="n">11</span> Risks &amp; Compliance</a></li>
+      <li><a href="#next"><span class="n">12</span> Next Steps</a></li>
+    </ul>
+    <div class="side-foot">
+      A founder-grade plan for a resume-enhancement &amp; job-matching SaaS with a Gulf + francophone wedge. Prices &amp; API rates verified mid-2026.
+    </div>
+  </nav>
+
+  <!-- ============ MAIN ============ -->
+  <main>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="eyebrow">Micro-SaaS · Job-seeker tooling · MENA + Francophone</div>
+      <h2>Don't just fix the CV.<br><span class="tagline">Land the interview.</span></h2>
+      <p class="lead">A single tool that takes a raw resume and returns a stronger one, an ATS score against a real job, a matched list of live vacancies, and a one-click Application Kit for each — tailored CV, motivation letter, follow-up email — with a Chrome extension that autofills the application and a tracker that logs it.</p>
+      <div class="pills">
+        <span class="pill hot">Gulf / bilingual moat</span>
+        <span class="pill">Static stack, zero infra</span>
+        <span class="pill">Claude Code build</span>
+        <span class="pill">Gemini content engine</span>
+        <span class="pill">JSearch job feed</span>
+        <span class="pill hot">~$0.06 cost / enhancement</span>
+      </div>
+    </div>
+
+    <!-- 01 OPPORTUNITY -->
+    <section id="opportunity">
+      <div class="eyebrow">01 — The Opportunity</div>
+      <h2>Why this, why now</h2>
+      <p>The resume-tool market is large, proven, and — critically — <strong>consolidating around all-in-one workflows</strong>. Users are tired of stitching four subscriptions together (a scanner, a builder, a tracker, a cover-letter tool) and paying $60–100/month for the privilege of copy-pasting between tabs. That fatigue is the wedge.</p>
+
+      <div class="grid3">
+        <div class="stat"><div class="big">~75%</div><div class="lbl">of resumes are filtered out by an ATS before a human reads them — the core fear you sell against.</div></div>
+        <div class="stat"><div class="big">+7.8%</div><div class="lbl">more job offers from AI-assisted resumes (MIT/Stanford, Hui et al.) — your outcome proof.</div></div>
+        <div class="stat"><div class="big">AED 300–800</div><div class="lbl">what human CV writers charge in Dubai. You're the AI alternative at a tenth of the price.</div></div>
+      </div>
+
+      <div class="callout gold">
+        <span class="tag">The gap nobody owns</span>
+        Every major tool is built US-English first. <strong>None</strong> handle the Gulf CV format (photo, nationality, visa status, driving licence), Arabic/French output, UAE–KSA–Qatar job feeds, WhatsApp alerts, or AED pricing. You live in Sharjah, you're bilingual FR/EN, and you already run a francophone audience. This is a moat you can defend and larger players won't bother chasing.
+      </div>
+
+      <p>Two under-served buyer pools sit in your backyard: the enormous Gulf expat job-seeker population, and francophone job-seekers (France + francophone Africa) for whom the <em>lettre de motivation</em> is culturally mandatory and English-first tools produce stilted, obviously-translated output.</p>
+    </section>
+
+    <!-- 02 LANDSCAPE -->
+    <section id="landscape">
+      <div class="eyebrow">02 — Competitive Landscape</div>
+      <h2>Who you're up against</h2>
+      <p>Pricing and positioning verified mid-2026. The pattern is clear: each incumbent is strong at <em>one</em> thing and weak across the rest. The winning move is bundling the workflow — then adding the regional layer none of them have.</p>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>Tool</th><th>Price (USD)</th><th>Strong at</th><th>Weak / missing</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Jobscan</strong></td><td class="mono">$49.95/mo<br><span style="color:var(--muted-2)">5 free scans</span></td><td>Deepest ATS keyword scan</td><td>Not a builder; most expensive on the market</td></tr>
+            <tr><td><strong>Teal</strong></td><td class="mono">$29/mo<br>($13/wk)</td><td>Job tracker + Chrome extension (category-leading)</td><td>AI does little real JD-specific rewriting; no interview prep</td></tr>
+            <tr><td><strong>Rezi</strong></td><td class="mono">$29/mo<br>$179/yr</td><td>Real-time ATS scoring while writing</td><td>No tracker, no matching cover letters, no outreach</td></tr>
+            <tr><td><strong>Kickresume</strong></td><td class="mono">$24/mo<br>$96/yr</td><td>Best template design; 40+ templates</td><td>Templates can break ATS parsing; thin tailoring</td></tr>
+            <tr><td><strong>Enhancv</strong></td><td class="mono">$19/mo<br>$7/mo yearly</td><td>Visual polish</td><td>US-centric; limited workflow</td></tr>
+            <tr><td>PitchMeAI</td><td class="mono">$22/mo</td><td>Recruiter email finder + outreach</td><td>Small player, narrow scope</td></tr>
+            <tr class="hl-row"><td><strong>CareerForge</strong> <span style="color:var(--ember)">(you)</span></td><td class="mono">~$12/mo<br>AED pricing</td><td>Full pipeline + Gulf/FR/AR layer + WhatsApp + interview prep</td><td>New entrant — must earn trust &amp; templates</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Read the whitespace:</strong> the features repeatedly flagged as <em>missing</em> across reviews — batch tailoring, recruiter outreach, a salary-negotiation simulator, interview prep, and a cover letter that actually matches the resume's tone — are cheap for you to add because they're just well-prompted LLM calls. The expensive-to-copy part is your regional layer.</p>
+    </section>
+
+    <!-- 03 PRODUCT -->
+    <section id="product">
+      <div class="eyebrow">03 — Product Definition</div>
+      <h2>The core loop</h2>
+      <p>Everything hangs off one canonical <strong>Profile JSON</strong> extracted from the uploaded CV. Build that schema well and every other feature is just a different view or transformation of it.</p>
+
+      <div class="card">
+        <p style="margin:0;font-family:var(--font-m);font-size:13.5px;line-height:2;color:var(--paper)">
+        <b style="color:var(--ember)">1.</b> Upload CV (PDF/DOCX) &nbsp;→&nbsp; <b style="color:var(--ember)">2.</b> Parse to Profile JSON &nbsp;→&nbsp; <b style="color:var(--ember)">3.</b> Enhance + ATS score<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+        <b style="color:var(--ember)">4.</b> Match live jobs (JSearch) with fit scores &nbsp;→&nbsp; <b style="color:var(--ember)">5.</b> One-click <b style="color:var(--gold)">Application Kit</b> per job<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;(tailored CV variant · motivation letter · follow-up email · LinkedIn message)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+        <b style="color:var(--ember)">6.</b> Chrome extension autofills the application &nbsp;→&nbsp; <b style="color:var(--ember)">7.</b> Tracker logs it (kanban)
+        </p>
+      </div>
+
+      <div class="callout">
+        <span class="tag">Architecture decision — read this first</span>
+        <strong>Do not build on Indeed or LinkedIn directly.</strong> Indeed retired its public Publisher API and LinkedIn's is enterprise-only; scraping either violates ToS and gets you blocked. Use an aggregator — <strong>JSearch</strong> pulls live listings, salary estimates and apply links from Google for Jobs (covering Indeed, LinkedIn, Glassdoor, ZipRecruiter) and supports country codes <code>ae</code>, <code>sa</code>, <code>qa</code>, <code>eg</code>, <code>fr</code>. Same rule for "auto-apply": don't bot-apply on job boards. Do what Simplify does — a browser extension that <em>autofills</em> from the user's profile. Legal, and Chrome extensions are literally your specialty (DropRadar).
+      </div>
+    </section>
+
+    <!-- 04 MOAT -->
+    <section id="moat">
+      <div class="eyebrow">04 — Standout Features</div>
+      <h2>What makes it unforgettable</h2>
+      <p>Ship 3–4 of these for v1. The starred two are the moat — do them before anything cosmetic.</p>
+
+      <div class="card">
+        <div class="moat">
+          <div class="ic">🌍</div>
+          <div><h4>★ Gulf &amp; bilingual mode</h4><p>EN / FR / AR output, plus a format toggle: Western CV vs. Gulf CV (photo, nationality, visa status, driving licence — the fields Gulf recruiters expect). Zero major player does this. Your single hardest-to-copy advantage.</p></div>
+        </div>
+        <div class="moat">
+          <div class="ic">📦</div>
+          <div><h4>★ Application Kit per job</h4><p>Not a generic cover letter. One click = tailored CV variant + motivation letter + follow-up email + LinkedIn DM, all pulled from the same profile so they never contradict each other. Nobody bundles this cleanly.</p></div>
+        </div>
+        <div class="moat">
+          <div class="ic">🎯</div>
+          <div><h4>ATS score + keyword gap</h4><p>Paste a JD (or pick a matched job) and see exactly which keywords are missing and where. This is Jobscan's entire $50/mo business as one feature inside yours.</p></div>
+        </div>
+        <div class="moat">
+          <div class="ic">💬</div>
+          <div><h4>WhatsApp job alerts</h4><p>Matched jobs delivered via WhatsApp (Twilio / WhatsApp Business API). Email alerts get ignored in MENA; WhatsApp does not. A regional unlock, not a gimmick.</p></div>
+        </div>
+        <div class="moat">
+          <div class="ic">🎤</div>
+          <div><h4>Interview prep</h4><p>Generate likely questions from the JD and draft STAR answers from the user's <em>actual</em> resume content. The gap every reviewer flags in Teal and Rezi.</p></div>
+        </div>
+        <div class="moat">
+          <div class="ic">🧩</div>
+          <div><h4>Chrome extension</h4><p>Autofill applications from the parsed profile and auto-log every application into the kanban tracker. Reuses everything you learned building DropRadar.</p></div>
+        </div>
+      </div>
+      <p class="divider-note">Later additions with proven demand: batch tailoring (paste 5 JDs → 5 tailored CVs), recruiter-outreach generator, salary-negotiation simulator, LinkedIn profile optimizer.</p>
+    </section>
+
+    <!-- 05 STACK -->
+    <section id="stack">
+      <div class="eyebrow">05 — Tech Stack</div>
+      <h2>Built the way you build</h2>
+      <p>Static frontend, serverless for secrets, one managed database. No build tools, no servers to babysit — the same zero-infra pattern behind FinanceNest and PixelForge.</p>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Layer</th><th>Choice</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td>Frontend</td><td>HTML + Tailwind CDN + vanilla JS on <strong>Vercel</strong></td><td>Your stack. Ships instantly, nothing to maintain.</td></tr>
+            <tr><td>Secrets / logic</td><td>Vercel serverless functions</td><td>Keeps API keys off the client. Every AI/job call routes through here.</td></tr>
+            <tr><td>Auth · DB · storage</td><td><strong>Supabase</strong> (Postgres + row-level security)</td><td>Resumes are PII — RLS is non-negotiable. Free tier covers launch.</td></tr>
+            <tr><td>CV parsing</td><td>pdf.js + mammoth.js (client) → <strong>Gemini Flash</strong> (extract)</td><td>Cheap, high-volume structured extraction to Profile JSON.</td></tr>
+            <tr><td>Quality writing</td><td><strong>Claude Sonnet</strong> (API)</td><td>Enhancement, motivation letters, interview answers — where quality is the product.</td></tr>
+            <tr><td>Job feed</td><td>JSearch via RapidAPI</td><td>Live listings + salary + apply links; MENA + FR country codes.</td></tr>
+            <tr><td>Resume export</td><td>2–3 HTML/CSS templates → print-CSS to PDF</td><td>No Puppeteer headaches for v1. Add server-render later.</td></tr>
+            <tr><td>Payments</td><td>Stripe (works in UAE) or <strong>Paddle</strong> (merchant-of-record, handles VAT)</td><td>Paddle if you'd rather not deal with tax. Gumroad for the launch lifetime deal.</td></tr>
+            <tr><td>Alerts</td><td>Twilio / WhatsApp Business API</td><td>The regional engagement channel.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout">
+        <span class="tag">The two-model split</span>
+        <strong>Gemini Flash</strong> is your cheap workhorse — parsing, extraction, classification, high-volume matching. <strong>Claude Sonnet</strong> is your quality pen — anything the user reads and judges you on. Routing by task, not by loyalty, is what keeps margins fat (see §08).
+      </div>
+    </section>
+
+    <!-- 06 BUILD PLAN -->
+    <section id="buildplan">
+      <div class="eyebrow">06 — Build Plan</div>
+      <h2>Six phases, roughly eight weeks</h2>
+      <p>Phases 1–4 are a shippable, paid v1. Phases 5–6 are the moat you layer on once money is coming in.</p>
+
+      <div style="margin-top:24px">
+        <div class="phase">
+          <div class="dot">0</div>
+          <div class="when">1–2 days · Setup</div>
+          <h3>Foundations</h3>
+          <ul>
+            <li>Lock name + domain (check <code>careerforge</code> availability — it fits the PixelForge / FinanceNest family).</li>
+            <li>Create Supabase + Vercel projects; grab a RapidAPI key for JSearch (free BASIC tier to start).</li>
+            <li>Teardown of Teal &amp; Rezi pricing/onboarding so you know the bar you're clearing.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <div class="dot">1</div>
+          <div class="when">Week 1 · Claude Code</div>
+          <h3>Core engine — the Profile JSON</h3>
+          <p>The heart of the product. Everything reads from this schema.</p>
+          <ul>
+            <li>Auth + upload → parse (pdf.js/mammoth) → Gemini Flash extraction to canonical Profile JSON.</li>
+            <li>Claude enhancement pass: rewrite bullets with metrics, kill weak verbs, tighten prose.</li>
+            <li>ATS score algorithm: keyword match, section completeness, formatting flags.</li>
+            <li>Editable profile UI.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <div class="dot">2</div>
+          <div class="when">Week 2 · Claude Code</div>
+          <h3>The Application Kit</h3>
+          <ul>
+            <li>Motivation-letter generator — with a true French <em>lettre de motivation</em> mode (the conventions differ, not just the language).</li>
+            <li>Tailored-CV-per-job, follow-up email, LinkedIn message.</li>
+            <li>Template gallery + print-CSS PDF export.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <div class="dot">3</div>
+          <div class="when">Week 3</div>
+          <h3>Job matching</h3>
+          <ul>
+            <li>JSearch integration with country/language params (start with <code>ae</code>, <code>fr</code>).</li>
+            <li>Fit-score ranking: embed JD + profile, score overlap, rank.</li>
+            <li>Saved jobs, daily digest, and salary ranges via JSearch's estimated-salary endpoint (free perceived value).</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <div class="dot">4</div>
+          <div class="when">Week 4 · Ship it</div>
+          <h3>Money + launch</h3>
+          <ul>
+            <li>Stripe/Paddle + credit system (see §09).</li>
+            <li>FR localization + landing page.</li>
+            <li>Your Gemini master-prompt playbook: Claude Code builds the app, then generates one master prompt for Gemini to produce landing copy, 30–60 SEO articles, FAQ schema, FR/AR translations — exactly the PixelForge move.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <div class="dot">5</div>
+          <div class="when">Weeks 5–8 · Moat</div>
+          <h3>Defensibility features</h3>
+          <ul>
+            <li>Chrome extension (autofill + auto-log to tracker).</li>
+            <li>WhatsApp alerts, interview prep, LinkedIn optimizer.</li>
+            <li>Gulf CV format + full AR output.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <div class="dot">6</div>
+          <div class="when">Ongoing</div>
+          <h3>Compound growth</h3>
+          <ul>
+            <li>Programmatic SEO ("CV template for [role]", "[role] jobs in Dubai").</li>
+            <li>Free standalone lead-magnet tools (see §10).</li>
+            <li>Real auto-apply only if demand justifies it — via a licensed API (e.g. LoopCV) with explicit user authorization, never home-grown botting.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 WORKFLOW -->
+    <section id="workflow">
+      <div class="eyebrow">07 — Claude Code + Gemini Workflow</div>
+      <h2>How to actually build it</h2>
+      <p>Two roles, cleanly separated. <strong>Claude Code writes the application</strong> (schema, serverless routes, UI, extension). <strong>Gemini mass-produces content</strong> (SEO, translations, marketing copy) from master prompts Claude writes for it. This is your proven PixelForge division of labour.</p>
+
+      <h3>Step 1 — Give Claude Code the context file</h3>
+      <p>Start every Claude Code session pointed at a <code>CLAUDE.md</code> that pins the stack, the Profile JSON schema, the DB tables, and the API routes. It stops drift and keeps output production-ready instead of scaffold-y.</p>
+
+      <div class="prompt-box">
+        <span class="lbl">CLAUDE.md skeleton</span>
+        <b># CareerForge — build context</b><br>
+        Stack: static HTML + Tailwind CDN + vanilla JS on Vercel. Serverless fns for secrets.<br>
+        DB/auth: Supabase (Postgres, RLS on every table touching resumes).<br>
+        Models: Gemini Flash = parsing/extraction/matching. Claude Sonnet = enhancement, letters, interview.<br>
+        Jobs: JSearch via RapidAPI (country codes ae, fr, sa, qa, eg).<br>
+        <br>
+        <b>## Canonical Profile JSON</b> (single source of truth — every feature reads this):<br>
+        { contact, summary, experience[{title,company,dates,bullets[]}],<br>
+        &nbsp;&nbsp;education[], skills[], languages[], certifications[], gulf_fields{} }<br>
+        <br>
+        <b>## Tables</b>: users · resumes · profiles · applications · saved_jobs · kits · credits<br>
+        <b>## Rules</b>: never expose keys client-side. All AI/job calls via /api/*. Ship complete files, no TODOs.
+      </div>
+
+      <h3>Step 2 — Build phase by phase with tight prompts</h3>
+      <p>Feed Claude Code one phase at a time (from §06), each as a concrete deliverable. Example for Phase 1:</p>
+      <div class="prompt-box">
+        <span class="lbl">Claude Code prompt</span>
+        Build the <b>parse → Profile JSON</b> pipeline. A serverless route <code>/api/parse</code> that takes extracted CV text, calls Gemini Flash with a strict JSON-schema system prompt (respond with JSON only, no prose), validates the result, and upserts to the <code>profiles</code> table. Then <code>/api/enhance</code> that takes a profile + target role, calls Claude Sonnet to rewrite bullets with metrics, and returns a diff view. Include the ATS scoring function. Give me every file, complete.
+      </div>
+
+      <h3>Step 3 — Hand content to Gemini</h3>
+      <p>Once the app works, ask Claude to write a single master prompt that turns Gemini into your content factory:</p>
+      <div class="prompt-box">
+        <span class="lbl">Gemini master prompt (Claude writes this for you)</span>
+        You are CareerForge's content engine. Produce: (1) landing-page copy for EN + FR, (2) 40 SEO article briefs targeting "CV writing Dubai", "lettre de motivation exemple", "[role] jobs UAE", (3) FAQ schema JSON-LD, (4) AR translations of core UI strings. Tone: practical, outcome-focused, no fluff. Output each as a labelled block.
+      </div>
+
+      <div class="callout gold">
+        <span class="tag">One non-negotiable</span>
+        Ship the privacy policy + data-deletion flow on <strong>day one</strong>. Resumes are sensitive personal data, and you'll need those pages for payments and any future AdSense anyway. You already know this drill from FinanceNest and PixelForge.
+      </div>
+    </section>
+
+    <!-- 08 ECONOMICS -->
+    <section id="economics">
+      <div class="eyebrow">08 — Unit Economics</div>
+      <h2>The margins are absurd</h2>
+      <p>This is why the two-model split matters. Verified 2026 rates: <span class="mono">Gemini Flash-Lite $0.10 / $0.40</span> per 1M tokens (in/out), <span class="mono">Gemini Flash $0.30 / $2.50</span>, <span class="mono">Claude Sonnet $3 / $15</span>. JSearch: free BASIC (~200 req/mo), then roughly <span class="mono">PRO $25 · ULTRA $75 · MEGA $150</span>.</p>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Action</th><th>Models used</th><th>Approx. cost</th></tr></thead>
+          <tbody>
+            <tr><td>Parse CV → Profile JSON</td><td>Gemini Flash</td><td class="mono">~$0.001</td></tr>
+            <tr><td>Resume enhancement pass</td><td>Claude Sonnet</td><td class="mono">~$0.05–0.06</td></tr>
+            <tr><td>Full Application Kit (letter + CV + email)</td><td>Claude Sonnet ×3</td><td class="mono">~$0.10–0.15</td></tr>
+            <tr><td>Job search + fit ranking</td><td>JSearch + Gemini Flash</td><td class="mono">~$0.002 + 1 API call</td></tr>
+            <tr class="hl-row"><td><strong>Heavy user: 20 applications / month</strong></td><td>mixed</td><td class="mono"><strong>~$2–4 total</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <span class="tag">The math that matters</span>
+        A Pro user paying <strong>~$12/mo</strong> who runs 20 full applications costs you <strong>~$2–4</strong> in AI + job-API. That's a <strong>~70–85% gross margin</strong> before fixed costs — and fixed costs are near zero on a static Vercel + Supabase-free-tier setup. Cache aggressively (Gemini context caching cuts repeat traffic up to 90%) and route bulk work to Flash-Lite to keep it there.
+      </div>
+    </section>
+
+    <!-- 09 PRICING -->
+    <section id="pricing">
+      <div class="eyebrow">09 — Pricing &amp; Monetization</div>
+      <h2>Price for the region, not the Valley</h2>
+      <p>Undercut the $29 incumbents, price in AED, and give one-timers a way to pay without subscribing (a repeatedly-requested gap the whole category leaves open).</p>
+
+      <div class="grid3">
+        <div class="card" style="margin:0">
+          <h4 style="margin-top:0;color:var(--muted)">Free</h4>
+          <p style="font-family:var(--font-d);font-size:26px;margin:4px 0 10px">AED&nbsp;0</p>
+          <p style="font-size:13.5px;margin:0;color:var(--muted)">1 resume · 3 enhancements · 1 ATS score. Enough to feel the value, capped to motivate upgrade.</p>
+        </div>
+        <div class="card" style="margin:0;border-color:rgba(255,107,44,.4);background:linear-gradient(160deg,rgba(255,107,44,.09),var(--ink-2))">
+          <h4 style="margin-top:0;color:var(--ember)">Pro · most popular</h4>
+          <p style="font-family:var(--font-d);font-size:26px;margin:4px 0 10px">~AED&nbsp;45<span style="font-size:14px;color:var(--muted)">/mo</span></p>
+          <p style="font-size:13.5px;margin:0;color:var(--muted)">Unlimited enhancements + Kits, job matching, tracker, WhatsApp alerts. ≈ $12 — well under Teal/Rezi.</p>
+        </div>
+        <div class="card" style="margin:0">
+          <h4 style="margin-top:0;color:var(--gold)">Credit packs</h4>
+          <p style="font-family:var(--font-d);font-size:26px;margin:4px 0 10px">one-time</p>
+          <p style="font-size:13.5px;margin:0;color:var(--muted)">For the "I just need one great application" crowd who refuse subscriptions. Captures a segment competitors ignore.</p>
+        </div>
+      </div>
+
+      <h4>Launch monetization sequence</h4>
+      <ul>
+        <li><strong>Gumroad lifetime deal</strong> to early birds — cash + testimonials before the subscription engine is even finished.</li>
+        <li><strong>Paddle or Stripe</strong> for recurring once you're past validation.</li>
+        <li><strong>Referral credits</strong> — invite 3 friends, unlock a free Application Kit.</li>
+      </ul>
+    </section>
+
+    <!-- 10 GTM -->
+    <section id="gtm">
+      <div class="eyebrow">10 — Marketing Angles</div>
+      <h2>Where the growth comes from</h2>
+
+      <h3>Positioning: sell the outcome</h3>
+      <p>Every competitor sells resume <em>building</em>. You sell the full pipeline to an application sent. <strong>"Don't just fix your CV — land the interview."</strong> That framing alone differentiates the landing page.</p>
+
+      <div class="grid2">
+        <div class="card">
+          <h4>🏙️ The Gulf wedge — your best angle</h4>
+          <p style="font-size:14px;margin-bottom:0">"Job tools are built for America. This one is built for the Gulf." Bilingual EN/AR CVs, Gulf format, UAE/KSA/Qatar feeds, WhatsApp alerts, AED pricing. Target <code>CV writing services Dubai</code> search traffic — people pay AED 300–800 for human writers there.</p>
+        </div>
+        <div class="card">
+          <h4>🇫🇷 The francophone wedge</h4>
+          <p style="font-size:14px;margin-bottom:0">The <em>lettre de motivation</em> is mandatory in France + francophone Africa, and English-first tools botch it. You're bilingual with a French audience via Le CYCLE — cross-promote career content directly.</p>
+        </div>
+        <div class="card">
+          <h4>🎬 Your unfair advantage — AI video</h4>
+          <p style="font-size:14px;margin-bottom:0">You have a Higgsfield/avatar pipeline most SaaS founders would kill for. Run a faceless "CV clinic" on TikTok/Reels: before/after glow-ups, "3 words killing your CV", "why the ATS rejected you in 6 seconds." The ATS-rejection fear hook converts hardest in this niche.</p>
+        </div>
+        <div class="card">
+          <h4>🧲 The PixelForge SEO funnel</h4>
+          <p style="font-size:14px;margin-bottom:0">Free standalone lead-magnet tools — ATS checker, CV-to-text converter, salary checker — each its own landing page feeding email capture. Then programmatic SEO pages fed by the job API.</p>
+        </div>
+      </div>
+
+      <h4>Day-one validation via Fiverr</h4>
+      <p>List an "AI-powered resume makeover" gig on <strong>@syllaslavatar</strong> and fulfil it with your own tool. Revenue before launch, real user feedback, and testimonials for the landing page — all before you've spent a dirham on ads.</p>
+
+      <h4>Launch sequence</h4>
+      <p>Gumroad lifetime deal → Product Hunt → LinkedIn job-seeker groups → referral loop. Seed the TikTok clinic content two weeks before launch so there's a trail when people search you.</p>
+    </section>
+
+    <!-- 11 RISKS -->
+    <section id="risks">
+      <div class="eyebrow">11 — Risks &amp; Compliance</div>
+      <h2>The things that bite founders here</h2>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Risk</th><th>Mitigation</th></tr></thead>
+          <tbody>
+            <tr><td>Scraping Indeed/LinkedIn → blocked, ToS breach</td><td>Never scrape. Use JSearch/aggregators only. Extension <em>autofills</em>, never bot-applies.</td></tr>
+            <tr><td>Resumes are sensitive PII</td><td>Supabase RLS on every relevant table, encrypted storage, day-one privacy policy + one-click data deletion.</td></tr>
+            <tr><td>AI cost blowout from retries/abuse</td><td>Hard per-user credit caps, request rate-limits, Gemini context caching, set a hard cap on the RapidAPI plan.</td></tr>
+            <tr><td>ATS "score" over-promising</td><td>Frame it as guidance, not a guarantee. Be transparent it's an estimate — trust is the product.</td></tr>
+            <tr><td>Template ATS-parse failures</td><td>Ship a few single-column, plain-text-friendly templates that always parse over many pretty ones that don't (Teal's lesson).</td></tr>
+            <tr><td>VAT / tax across regions</td><td>Use Paddle as merchant-of-record if you'd rather not handle it yourself.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 12 NEXT -->
+    <section id="next">
+      <div class="eyebrow">12 — Next Steps</div>
+      <h2>What I can generate next</h2>
+      <p>The natural next artifacts, any of which I can produce now:</p>
+      <ul>
+        <li><strong>The full <code>CLAUDE.md</code></strong> — complete Profile JSON schema, all DB tables with columns + RLS policies, every <code>/api/*</code> route signature, and phase-by-phase Claude Code prompts you can paste straight in.</li>
+        <li><strong>The Gemini master prompt</strong> — one prompt that outputs landing copy (EN/FR), 40 SEO briefs, FAQ schema, and AR UI strings.</li>
+        <li><strong>The ATS scoring spec</strong> — the exact algorithm (keyword weighting, section checks, formatting flags) so scores feel credible.</li>
+        <li><strong>A landing-page HTML</strong> in this same visual language, ready to deploy to Vercel.</li>
+      </ul>
+      <p style="margin-top:18px">Tell me which one and I'll build it.</p>
+
+      <div class="foot">
+        CareerForge Build Blueprint · Prepared for a Sharjah-based solo founder · Competitor pricing, job-API rates and LLM token costs verified mid-2026 and will drift — reconfirm before you commit spend. Figures are planning estimates, not financial advice.
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // Scroll-spy for the TOC
+  const links = [...document.querySelectorAll('.toc a')];
+  const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(l=>l.classList.remove('active'));
+        const a = map.get(e.target.id);
+        if(a) a.classList.add('active');
+      }
+    });
+  },{rootMargin:'-20% 0px -70% 0px', threshold:0});
+  document.querySelectorAll('section').forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>

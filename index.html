@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareerForge — Don’t just fix your CV. Land the interview.</title>
+  <meta name="description" content="Upload your CV, get AI-enhanced bullets, see your ATS keyword gap, and apply with a complete Application Kit — in English, French and Arabic. Built for the Gulf and francophone markets." />
+  <meta name="theme-color" content="#edeff7" />
+  <meta property="og:title" content="CareerForge — Don’t just fix your CV. Land the interview." />
+  <meta property="og:description" content="AI CV enhancement, ATS keyword gap and one-click application kits in EN · FR · AR." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="public/css/forge.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+</head>
+<body>
+  <a href="#main" class="skip-link" data-i18n="skip">Skip to content</a>
+
+  <!-- ═══════════════════ NAV ═══════════════════ -->
+  <header class="sticky top-0 z-50 px-4 sm:px-6 pt-4">
+    <nav class="glass !rounded-[22px] max-w-6xl mx-auto ps-4 pe-2 py-2 flex items-center gap-3" aria-label="Main">
+      <a href="#" class="inline-flex items-center gap-2.5 me-auto">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="font-display font-semibold text-lg">CareerForge</span>
+      </a>
+      <div class="hidden md:flex items-center gap-1 text-sm font-medium text-soft">
+        <a href="#features" class="px-3 py-2 rounded-full hover:bg-white/80 hover:text-ink transition-colors" data-i18n="nav_features">Features</a>
+        <a href="#how" class="px-3 py-2 rounded-full hover:bg-white/80 hover:text-ink transition-colors" data-i18n="nav_how">How it works</a>
+        <a href="#pricing" class="px-3 py-2 rounded-full hover:bg-white/80 hover:text-ink transition-colors" data-i18n="nav_pricing">Pricing</a>
+        <a href="#faq" class="px-3 py-2 rounded-full hover:bg-white/80 hover:text-ink transition-colors" data-i18n="nav_faq">FAQ</a>
+      </div>
+      <div class="lang-switch hidden sm:inline-flex" role="group" aria-label="Language">
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
+        <button type="button" class="lang-btn" data-lang="ar" aria-pressed="false" lang="ar">ع</button>
+      </div>
+      <a id="nav-signin" href="app.html" class="btn btn-sm btn-glass hidden sm:inline-flex" data-i18n="nav_signin">Sign in</a>
+      <a href="#signup" class="btn btn-sm btn-ink" data-i18n="nav_start">Start free</a>
+    </nav>
+    <!-- Phone-width language switch -->
+    <div class="sm:hidden max-w-6xl mx-auto mt-2 flex justify-end">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
+        <button type="button" class="lang-btn" data-lang="ar" aria-pressed="false" lang="ar">ع</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ═══════════════════ HERO ═══════════════════ -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-10 sm:pt-16 pb-10">
+      <div class="grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] gap-10 lg:gap-12 items-center">
+        <div>
+          <span class="rise d1 chip chip-iris !py-1.5 !px-3.5">
+            <i data-icon="globe" class="w-3.5 h-3.5"></i><span data-i18n="hero_badge">Built for the Gulf · English · Français · العربية</span>
+          </span>
+          <h1 class="rise d2 font-display font-semibold text-[2.6rem] leading-[1.02] sm:text-6xl lg:text-[4.1rem] mt-6">
+            <span data-i18n="hero_title_1">Don’t just fix your CV.</span>
+            <span class="block text-iris" data-i18n="hero_title_2">Land the interview.</span>
+          </h1>
+          <p class="rise d3 text-soft text-lg leading-relaxed mt-6 max-w-xl" data-i18n="hero_sub">
+            Upload your CV once. CareerForge rewrites your experience with AI, shows the exact keywords a job’s ATS is looking for, and prepares a tailored application — in the language the recruiter reads.
+          </p>
+          <div class="rise d4 flex flex-wrap items-center gap-3 mt-8">
+            <a href="#signup" class="btn btn-primary !min-h-[52px] !px-7">
+              <span data-i18n="hero_cta">Start free — 5 credits included</span><i data-icon="arrow-right" class="flip-rtl"></i>
+            </a>
+            <a href="#how" class="btn btn-glass !min-h-[52px] !px-6" data-i18n="hero_cta2">See how it works</a>
+          </div>
+          <ul class="rise d5 flex flex-wrap gap-x-6 gap-y-2 mt-8 text-sm text-soft">
+            <li class="flex items-center gap-2"><i data-icon="shield" class="w-4 h-4 text-iris"></i><span data-i18n="trust_1">Read in your browser</span></li>
+            <li class="flex items-center gap-2"><i data-icon="check-circle" class="w-4 h-4 text-iris"></i><span data-i18n="trust_2">Never invents facts</span></li>
+            <li class="flex items-center gap-2"><i data-icon="zap" class="w-4 h-4 text-iris"></i><span data-i18n="trust_3">CV parsing always free</span></li>
+          </ul>
+        </div>
+
+        <!-- Hero stage: the Forge with floating glass objects -->
+        <div class="rise d3 relative h-[400px] sm:h-[470px]" aria-hidden="true">
+          <div class="absolute inset-x-6 top-10 bottom-4 rounded-[36px] bg-gradient-to-b from-white/50 to-white/0 border border-white/70"></div>
+
+          <div class="absolute left-1/2 -translate-x-1/2 bottom-8">
+            <div class="forge" id="hero-forge">
+              <div class="forge-dish"></div>
+              <div class="tube-wrap"><span class="tube-value">100%</span><div class="tube" style="--h:calc(var(--tube-h)*.78)"><div class="tube-gloss"></div><div class="tube-fill" style="--fill:0" data-fill="100"></div></div><span class="tube-label" data-i18n="forge_parse">Parse</span></div>
+              <div class="tube-wrap"><span class="tube-value">+9</span><div class="tube" style="--h:calc(var(--tube-h)*1.05)"><div class="tube-gloss"></div><div class="tube-fill" style="--fill:0" data-fill="78"></div></div><span class="tube-label" data-i18n="forge_enhance">Enhance</span></div>
+              <div class="tube-wrap"><span class="tube-value">84</span><div class="tube" style="--h:calc(var(--tube-h)*.92)"><div class="tube-gloss"></div><div class="tube-fill is-mint" style="--fill:0" data-fill="84"></div></div><span class="tube-label">ATS</span></div>
+              <div class="tube-wrap"><span class="tube-value">4</span><div class="tube" style="--h:calc(var(--tube-h)*.7)"><div class="tube-gloss"></div><div class="tube-fill" style="--fill:0" data-fill="62"></div></div><span class="tube-label" data-i18n="forge_kit">Kit</span></div>
+            </div>
+          </div>
+
+          <!-- Cube: CV document -->
+          <div class="cube drift w-[92px] h-[92px] top-2 start-2 sm:start-8 grid place-items-center" style="--rot:-8deg">
+            <div class="w-12 h-14 rounded-lg bg-white shadow-sm p-2 space-y-1.5">
+              <div class="h-1.5 w-6 rounded bg-[var(--iris)]"></div>
+              <div class="h-1 w-full rounded bg-[#dfe1f1]"></div>
+              <div class="h-1 w-5/6 rounded bg-[#dfe1f1]"></div>
+              <div class="h-1 w-full rounded bg-[#dfe1f1]"></div>
+              <div class="h-1 w-2/3 rounded bg-[#dfe1f1]"></div>
+            </div>
+          </div>
+
+          <!-- Cube: missing keyword (ink) -->
+          <div class="cube cube-ink drift-slow top-0 end-4 sm:end-10 px-4 py-3.5" style="--rot:6deg; animation-delay:-3s">
+            <p class="font-mono text-[0.62rem] uppercase tracking-wider text-[#b8badb]" data-i18n="cube_missing">Missing keyword</p>
+            <p class="mt-1.5 inline-flex items-center gap-1.5 rounded-full bg-[var(--saffron-soft)] text-[var(--saffron)] px-2.5 py-1 font-mono text-xs font-medium">+ power bi</p>
+          </div>
+
+          <!-- Cube: languages -->
+          <div class="cube drift w-[78px] h-[78px] top-[42%] end-0 grid place-items-center" style="--rot:10deg; animation-delay:-5s">
+            <div class="text-center leading-tight">
+              <p class="font-mono text-[0.7rem] text-mute">EN · FR</p>
+              <p class="font-display text-2xl font-semibold text-iris" lang="ar">ع</p>
+            </div>
+          </div>
+
+          <!-- Cube: WhatsApp alert -->
+          <div class="cube drift-slow z-10 bottom-28 start-0 px-3.5 py-3 max-w-[160px]" style="--rot:-5deg; animation-delay:-1.5s">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 shrink-0 rounded-full bg-[var(--mint-soft)] text-[var(--mint)] grid place-items-center"><i data-icon="message" class="w-4 h-4"></i></span>
+              <p class="text-[0.72rem] font-semibold leading-tight text-ink" data-i18n="cube_alert">3 new matches in Dubai</p>
+            </div>
+          </div>
+
+          <!-- Accent orb (the reference's round action button) -->
+          <span class="absolute top-[13%] start-[36%] w-11 h-11 rounded-full bg-[var(--iris)] text-white grid place-items-center shadow-[0_12px_24px_-10px_rgba(90,85,240,.9)] drift" style="animation-delay:-2s"><i data-icon="sparkles" class="w-5 h-5"></i></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ DEMO STRIP (ink) ═══════════════════ -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6" aria-labelledby="demo-title">
+      <div class="reveal ink-card p-6 sm:p-8">
+        <div class="grid lg:grid-cols-[1.5fr_auto_1fr] gap-8 items-center">
+          <div>
+            <p class="eyebrow" id="demo-title" data-i18n="demo_kicker">One bullet, through the forge</p>
+            <div class="mt-4 grid sm:grid-cols-2 gap-3">
+              <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
+                <p class="font-mono text-[0.66rem] uppercase tracking-wider text-[#b8badb]" data-i18n="demo_before_label">Before</p>
+                <p class="mt-2 text-sm text-[#b8badb] line-through decoration-white/30" data-i18n="demo_before">Helped with the weekly sales reports, got prep down from 5 hours to 2</p>
+              </div>
+              <div class="rounded-2xl bg-white/10 border border-white/20 p-4">
+                <p class="font-mono text-[0.66rem] uppercase tracking-wider text-[#b9b6ff]" data-i18n="demo_after_label">After</p>
+                <p class="mt-2 text-sm font-medium" data-i18n="demo_after">Automated weekly sales reporting, cutting preparation time from 5 hours to 2</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex lg:flex-col items-center gap-4 lg:px-8 lg:border-x border-white/10">
+            <div class="ring ring-sm" style="--val:84; --ring-color:#7fe0bd">
+              <span class="font-mono text-lg font-medium text-ink">84</span>
+            </div>
+            <p class="text-sm text-[#b8badb]" data-i18n="demo_ats">ATS match</p>
+          </div>
+          <div>
+            <p class="font-mono text-[0.66rem] uppercase tracking-wider text-[#b8badb]" data-i18n="demo_keywords">Keyword gap</p>
+            <div class="flex flex-wrap gap-1.5 mt-3">
+              <span class="chip chip-ink chip-key"><i data-icon="check" class="text-[#7fe0bd]"></i>sql</span>
+              <span class="chip chip-ink chip-key"><i data-icon="check" class="text-[#7fe0bd]"></i>forecasting</span>
+              <span class="chip chip-ink chip-key"><i data-icon="check" class="text-[#7fe0bd]"></i>stakeholders</span>
+              <span class="chip chip-saffron chip-key">+ power bi</span>
+              <span class="chip chip-saffron chip-key">+ arabic</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ STAT ROW ═══════════════════ -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 mt-5">
+      <ul class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <li class="reveal glass glass-sm stat-tile"><span class="stat-value">0</span><span class="stat-label" data-i18n="stat_1">credits to parse your CV — always free</span></li>
+        <li class="reveal glass glass-sm stat-tile"><span class="stat-value">3</span><span class="stat-label" data-i18n="stat_2">languages: English, French, Arabic</span></li>
+        <li class="reveal glass glass-sm stat-tile"><span class="stat-value">7</span><span class="stat-label" data-i18n="stat_3">job markets, from Dubai to Paris</span></li>
+        <li class="reveal glass glass-sm stat-tile"><span class="stat-value">5</span><span class="stat-label" data-i18n="stat_4">free credits on signup — no card</span></li>
+      </ul>
+    </section>
+
+    <!-- ═══════════════════ FEATURES (bento) ═══════════════════ -->
+    <section id="features" class="max-w-6xl mx-auto px-4 sm:px-6 pt-24 scroll-mt-24">
+      <div class="reveal max-w-2xl">
+        <p class="eyebrow" data-i18n="features_kicker">Everything in one place</p>
+        <h2 class="font-display text-3xl sm:text-5xl font-semibold leading-[1.05] mt-3" data-i18n="features_title">From “uploaded” to “hired”, every step is covered</h2>
+        <p class="text-soft mt-4 text-lg" data-i18n="features_sub">Stop juggling five tools. One profile powers every enhancement, score and application.</p>
+      </div>
+
+      <div class="grid md:grid-cols-6 gap-4 mt-12">
+        <!-- Gulf CV (ink, tall) -->
+        <article class="reveal ink-card md:col-span-2 md:row-span-2 p-6 flex flex-col">
+          <span class="icon-tile"><i data-icon="id-card"></i></span>
+          <h3 class="font-display text-xl font-semibold mt-5" data-i18n="f_gulf_title">Gulf CV format</h3>
+          <p class="text-dim text-sm mt-2 leading-relaxed" data-i18n="f_gulf_desc">The fields Gulf recruiters expect — formatted the way they read them.</p>
+          <dl class="mt-6 space-y-2 text-sm">
+            <div class="flex items-center justify-between gap-3 rounded-xl bg-white/5 border border-white/10 px-3.5 py-2.5"><dt class="text-dim" data-i18n="gulf_nat">Nationality</dt><dd class="font-medium" data-i18n="gulf_nat_v">Egyptian</dd></div>
+            <div class="flex items-center justify-between gap-3 rounded-xl bg-white/5 border border-white/10 px-3.5 py-2.5"><dt class="text-dim" data-i18n="gulf_visa">Visa status</dt><dd class="font-medium" data-i18n="gulf_visa_v">Employment visa</dd></div>
+            <div class="flex items-center justify-between gap-3 rounded-xl bg-white/5 border border-white/10 px-3.5 py-2.5"><dt class="text-dim" data-i18n="gulf_notice">Notice period</dt><dd class="font-medium" data-i18n="gulf_notice_v">30 days</dd></div>
+            <div class="flex items-center justify-between gap-3 rounded-xl bg-white/5 border border-white/10 px-3.5 py-2.5"><dt class="text-dim" data-i18n="gulf_license">Driving licence</dt><dd class="font-medium" data-i18n="gulf_license_v">UAE · Automatic</dd></div>
+          </dl>
+        </article>
+
+        <!-- Enhancement (wide) -->
+        <article class="reveal glass md:col-span-4 p-6 sm:p-7">
+          <div class="flex flex-col sm:flex-row gap-6">
+            <div class="sm:w-2/5">
+              <span class="icon-tile"><i data-icon="sparkles"></i></span>
+              <h3 class="font-display text-xl font-semibold mt-5" data-i18n="f_enh_title">AI bullet enhancement</h3>
+              <p class="text-soft text-sm mt-2 leading-relaxed" data-i18n="f_enh_desc">Claude rewrites every bullet with a strong verb and a clear outcome. It never invents employers, numbers or facts.</p>
+            </div>
+            <div class="flex-1 space-y-2.5">
+              <div class="rounded-2xl bg-white/70 border border-white p-4">
+                <p class="font-mono text-[0.66rem] uppercase tracking-wider text-mute" data-i18n="demo_before_label">Before</p>
+                <p class="text-sm text-mute line-through mt-1.5" data-i18n="f_enh_before">Worked on onboarding for new clients</p>
+              </div>
+              <div class="rounded-2xl bg-white border border-[#dcd9fd] p-4 shadow-[0_12px_24px_-18px_rgba(90,85,240,.6)]">
+                <p class="font-mono text-[0.66rem] uppercase tracking-wider text-iris" data-i18n="demo_after_label">After</p>
+                <p class="text-sm font-medium mt-1.5" data-i18n="f_enh_after">Led onboarding for new enterprise clients, owning setup from contract to go-live</p>
+              </div>
+              <p class="text-xs text-mute flex items-center gap-1.5"><i data-icon="refresh" class="w-3.5 h-3.5"></i><span data-i18n="f_enh_revert">Your original is always kept — revert anytime.</span></p>
+            </div>
+          </div>
+        </article>
+
+        <!-- ATS gap -->
+        <article class="reveal glass md:col-span-2 p-6">
+          <div class="flex items-center justify-between">
+            <span class="icon-tile"><i data-icon="target"></i></span>
+            <div class="ring ring-sm" style="--val:72"><span class="font-mono text-sm font-medium">72</span></div>
+          </div>
+          <h3 class="font-display text-xl font-semibold mt-5" data-i18n="f_ats_title">ATS keyword gap</h3>
+          <p class="text-soft text-sm mt-2 leading-relaxed" data-i18n="f_ats_desc">An explainable score — and the exact keywords you’re missing for this job.</p>
+        </article>
+
+        <!-- Languages -->
+        <article class="reveal glass md:col-span-2 p-6">
+          <div class="flex gap-2">
+            <span class="grid place-items-center w-11 h-11 rounded-xl bg-white border border-[#e1e3f3] font-mono text-sm">EN</span>
+            <span class="grid place-items-center w-11 h-11 rounded-xl bg-white border border-[#e1e3f3] font-mono text-sm">FR</span>
+            <span class="grid place-items-center w-11 h-11 rounded-xl bg-[var(--ink)] text-white font-display text-lg" lang="ar">ع</span>
+          </div>
+          <h3 class="font-display text-xl font-semibold mt-5" data-i18n="f_lang_title">EN · FR · AR output</h3>
+          <p class="text-soft text-sm mt-2 leading-relaxed" data-i18n="f_lang_desc">A real lettre de motivation, not a translated one. Arabic with proper right-to-left layout.</p>
+        </article>
+
+        <!-- Application Kit (wide) -->
+        <article class="reveal glass md:col-span-3 p-6 sm:p-7">
+          <span class="icon-tile"><i data-icon="send"></i></span>
+          <h3 class="font-display text-xl font-semibold mt-5" data-i18n="f_kit_title">One-click Application Kit</h3>
+          <p class="text-soft text-sm mt-2 leading-relaxed" data-i18n="f_kit_desc">Four documents per job, tailored to the description and written in the recruiter’s language.</p>
+          <ul class="grid sm:grid-cols-2 gap-2 mt-5 text-sm font-medium">
+            <li class="flex items-center gap-2.5 rounded-xl bg-white/70 border border-white px-3 py-2.5"><i data-icon="id-card" class="w-4 h-4 text-iris shrink-0"></i><span data-i18n="kit_cv">Tailored CV variant</span></li>
+            <li class="flex items-center gap-2.5 rounded-xl bg-white/70 border border-white px-3 py-2.5"><i data-icon="file-text" class="w-4 h-4 text-iris shrink-0"></i><span data-i18n="kit_letter">Motivation letter</span></li>
+            <li class="flex items-center gap-2.5 rounded-xl bg-white/70 border border-white px-3 py-2.5"><i data-icon="mail" class="w-4 h-4 text-iris shrink-0"></i><span data-i18n="kit_email">Follow-up email</span></li>
+            <li class="flex items-center gap-2.5 rounded-xl bg-white/70 border border-white px-3 py-2.5"><i data-icon="message" class="w-4 h-4 text-iris shrink-0"></i><span data-i18n="kit_linkedin">LinkedIn message</span></li>
+          </ul>
+        </article>
+
+        <!-- WhatsApp alerts (ink) -->
+        <article class="reveal ink-card md:col-span-3 p-6 sm:p-7">
+          <div class="flex flex-col sm:flex-row gap-6">
+            <div class="sm:w-1/2">
+              <span class="icon-tile"><i data-icon="message"></i></span>
+              <h3 class="font-display text-xl font-semibold mt-5" data-i18n="f_wa_title">WhatsApp job alerts</h3>
+              <p class="text-dim text-sm mt-2 leading-relaxed" data-i18n="f_wa_desc">Matched jobs land where you actually look — daily or weekly. Email is optional.</p>
+            </div>
+            <div class="flex-1 flex flex-col gap-2 justify-center">
+              <div class="self-start max-w-[90%] rounded-2xl rounded-ss-md bg-white/10 border border-white/15 px-3.5 py-2.5 text-sm" data-i18n="wa_msg1">3 new jobs match your profile today</div>
+              <div class="self-start max-w-[90%] rounded-2xl rounded-ss-md bg-white text-ink px-3.5 py-2.5 text-sm">
+                <p class="font-semibold" data-i18n="wa_msg2">Data Analyst · Dubai</p>
+                <p class="font-mono text-xs text-[var(--mint)] mt-0.5" data-i18n="wa_msg3">86% fit · AED 18–22k</p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ HOW IT WORKS (a real sequence) ═══════════════════ -->
+    <section id="how" class="max-w-6xl mx-auto px-4 sm:px-6 pt-28 scroll-mt-24">
+      <div class="reveal max-w-2xl">
+        <p class="eyebrow" data-i18n="how_kicker">The path, step by step</p>
+        <h2 class="font-display text-3xl sm:text-5xl font-semibold leading-[1.05] mt-3" data-i18n="how_title">Five steps from CV to interview</h2>
+      </div>
+
+      <ol class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-12">
+        <li class="reveal glass glass-sm p-5">
+          <span class="font-mono text-xs text-iris">01</span>
+          <span class="icon-tile mt-4"><i data-icon="upload"></i></span>
+          <h3 class="font-display text-lg font-semibold mt-4" data-i18n="how1_title">Upload</h3>
+          <p class="text-sm text-soft mt-1.5 leading-relaxed" data-i18n="how1_desc">PDF or DOCX, read in your browser. Structured profile in about 30 seconds.</p>
+        </li>
+        <li class="reveal glass glass-sm p-5">
+          <span class="font-mono text-xs text-iris">02</span>
+          <span class="icon-tile mt-4"><i data-icon="sparkles"></i></span>
+          <h3 class="font-display text-lg font-semibold mt-4" data-i18n="how2_title">Enhance</h3>
+          <p class="text-sm text-soft mt-1.5 leading-relaxed" data-i18n="how2_desc">Stronger verbs, clearer outcomes — shown side by side with your original.</p>
+        </li>
+        <li class="reveal glass glass-sm p-5">
+          <span class="font-mono text-xs text-iris">03</span>
+          <span class="icon-tile mt-4"><i data-icon="target"></i></span>
+          <h3 class="font-display text-lg font-semibold mt-4" data-i18n="how3_title">Match</h3>
+          <p class="text-sm text-soft mt-1.5 leading-relaxed" data-i18n="how3_desc">Paste a job. See your score and the keywords to add.</p>
+        </li>
+        <li class="reveal glass glass-sm p-5">
+          <span class="font-mono text-xs text-iris">04</span>
+          <span class="icon-tile mt-4"><i data-icon="send"></i></span>
+          <h3 class="font-display text-lg font-semibold mt-4" data-i18n="how4_title">Apply</h3>
+          <p class="text-sm text-soft mt-1.5 leading-relaxed" data-i18n="how4_desc">Generate the kit: CV, letter, follow-up and LinkedIn message.</p>
+        </li>
+        <li class="reveal ink-card !rounded-[20px] p-5">
+          <span class="font-mono text-xs text-[#b9b6ff]">05</span>
+          <span class="icon-tile mt-4"><i data-icon="kanban"></i></span>
+          <h3 class="font-display text-lg font-semibold mt-4" data-i18n="how5_title">Track</h3>
+          <p class="text-sm text-dim mt-1.5 leading-relaxed" data-i18n="how5_desc">Every application on one board — from saved to offer.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ═══════════════════ PRICING ═══════════════════ -->
+    <section id="pricing" class="max-w-6xl mx-auto px-4 sm:px-6 pt-28 scroll-mt-24">
+      <div class="reveal max-w-2xl">
+        <p class="eyebrow" data-i18n="pricing_kicker">Priced for the region</p>
+        <h2 class="font-display text-3xl sm:text-5xl font-semibold leading-[1.05] mt-3" data-i18n="pricing_title">Start free. Upgrade when it pays off.</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4 mt-12 items-stretch">
+        <div class="reveal glass p-7 flex flex-col">
+          <h3 class="font-display text-lg font-semibold" data-i18n="plan_free">Free</h3>
+          <p class="font-mono text-4xl font-medium mt-3">$0</p>
+          <ul class="text-sm text-soft space-y-3 mt-6 flex-1">
+            <li class="flex gap-2.5"><i data-icon="check" class="w-5 h-5 text-iris shrink-0"></i><span data-i18n="plan_free_1">5 credits on signup</span></li>
+            <li class="flex gap-2.5"><i data-icon="check" class="w-5 h-5 text-iris shrink-0"></i><span data-i18n="plan_free_2">CV parsing — always free</span></li>
+            <li class="flex gap-2.5"><i data-icon="check" class="w-5 h-5 text-iris shrink-0"></i><span data-i18n="plan_free_3">1 enhancement + 1 ATS score + 1 kit</span></li>
+          </ul>
+          <a href="#signup" class="btn btn-glass btn-block mt-8" data-i18n="plan_free_cta">Try it free</a>
+        </div>
+
+        <div class="reveal ink-card p-7 flex flex-col md:-my-3">
+          <div class="flex items-center justify-between gap-3">
+            <h3 class="font-display text-lg font-semibold" data-i18n="plan_pro">Pro</h3>
+            <span class="badge bg-white/10 text-[#d4d2ff]" data-i18n="plan_popular">Most popular</span>
+          </div>
+          <p class="font-mono text-4xl font-medium mt-3">AED 45<span class="text-base text-[#b8badb]" data-i18n="per_month">/mo</span></p>
+          <ul class="text-sm space-y-3 mt-6 flex-1">
+            <li class="flex gap-2.5"><i data-icon="check" class="w-5 h-5 text-[#9ee6c9] shrink-0"></i><span data-i18n="plan_pro_1">Enhancements & ATS scores within a generous fair-use cap</span></li>
+            <li class="flex gap-2.5"><i data-icon="check" class="w-5 h-5 text-[#9ee6c9] shrink-0"></i><span data-i18n="plan_pro_2">Application Kits for every job you target</span></li>
+            <li class="flex gap-2.5"><i data-icon="check" class="w-5 h-5 text-[#9ee6c9] shrink-0"></i><span data-i18n="plan_pro_3">WhatsApp job alerts</span></li>
+            <li class="flex gap-2.5"><i data-icon="check" class="w-5 h-5 text-[#9ee6c9] shrink-0"></i><span data-i18n="plan_pro_4">Gulf CV + trilingual output</span></li>
+          </ul>
+          <a href="#signup" class="btn btn-primary btn-block mt-8" data-i18n="plan_pro_cta">Get Pro</a>
+        </div>
+
+        <div class="reveal glass p-7 flex flex-col">
+          <h3 class="font-display text-lg font-semibold" data-i18n="plan_packs">Credit packs</h3>
+          <p class="font-display text-3xl font-semibold mt-3" data-i18n="plan_packs_price">Pay as you go</p>
+          <ul class="text-sm text-soft space-y-3 mt-6 flex-1">
+            <li class="flex gap-2.5"><i data-icon="check" class="w-5 h-5 text-iris shrink-0"></i><span data-i18n="plan_packs_1">No subscription needed</span></li>
+            <li class="flex gap-2.5"><i data-icon="check" class="w-5 h-5 text-iris shrink-0"></i><span data-i18n="plan_packs_2">Credits never expire</span></li>
+            <li class="flex gap-2.5"><i data-icon="check" class="w-5 h-5 text-iris shrink-0"></i><span data-i18n="plan_packs_3">Perfect for one job hunt</span></li>
+          </ul>
+          <a href="#signup" class="btn btn-glass btn-block mt-8" data-i18n="plan_packs_cta">Buy credits</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ FAQ ═══════════════════ -->
+    <section id="faq" class="max-w-3xl mx-auto px-4 sm:px-6 pt-28 scroll-mt-24">
+      <h2 class="reveal font-display text-3xl sm:text-4xl font-semibold text-center" data-i18n="faq_title">Frequently asked questions</h2>
+      <div class="space-y-3 mt-10">
+        <details class="reveal faq glass glass-sm px-6 py-5">
+          <summary class="flex items-center justify-between gap-4 font-semibold min-h-[28px]"><span data-i18n="faq1_q">Is my CV data private?</span><i data-icon="plus" class="faq-icon w-5 h-5 text-iris shrink-0"></i></summary>
+          <p class="text-soft text-sm leading-relaxed mt-3" data-i18n="faq1_a">Yes. Your file is read in your own browser, stored in a private bucket only you can access, and you can delete everything at any time. Resumes are sensitive data — we treat them that way.</p>
+        </details>
+        <details class="reveal faq glass glass-sm px-6 py-5">
+          <summary class="flex items-center justify-between gap-4 font-semibold min-h-[28px]"><span data-i18n="faq2_q">Will the AI invent experience I don’t have?</span><i data-icon="plus" class="faq-icon w-5 h-5 text-iris shrink-0"></i></summary>
+          <p class="text-soft text-sm leading-relaxed mt-3" data-i18n="faq2_a">Never. The enhancer strengthens your own wording — it is explicitly forbidden from inventing metrics, employers or facts. Your original bullets are always kept.</p>
+        </details>
+        <details class="reveal faq glass glass-sm px-6 py-5">
+          <summary class="flex items-center justify-between gap-4 font-semibold min-h-[28px]"><span data-i18n="faq3_q">Does the ATS score guarantee I pass?</span><i data-icon="plus" class="faq-icon w-5 h-5 text-iris shrink-0"></i></summary>
+          <p class="text-soft text-sm leading-relaxed mt-3" data-i18n="faq3_a">No tool can promise that. Our score is an estimate built from keyword match, section completeness and formatting health — its real value is the missing-keywords list that tells you exactly what to fix.</p>
+        </details>
+        <details class="reveal faq glass glass-sm px-6 py-5">
+          <summary class="flex items-center justify-between gap-4 font-semibold min-h-[28px]"><span data-i18n="faq4_q">Which countries and languages are supported?</span><i data-icon="plus" class="faq-icon w-5 h-5 text-iris shrink-0"></i></summary>
+          <p class="text-soft text-sm leading-relaxed mt-3" data-i18n="faq4_a">Job feeds cover the UAE, Saudi Arabia, Qatar, Egypt, France, the UK and the US. Documents can be generated in English, French or Arabic — including a Gulf CV format with visa status and nationality fields.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ SIGNUP ═══════════════════ -->
+    <section id="signup" class="max-w-6xl mx-auto px-4 sm:px-6 pt-28 pb-20 scroll-mt-24">
+      <div class="reveal ink-card p-7 sm:p-12">
+        <div class="grid lg:grid-cols-2 gap-10 items-center">
+          <div>
+            <h2 class="font-display text-3xl sm:text-5xl font-semibold leading-[1.05]" data-i18n="signup_title">Your next interview starts with one upload.</h2>
+            <p class="text-dim mt-5 text-lg leading-relaxed" data-i18n="signup_sub">Create your free account — 5 credits included, no card required. Upload your CV and see your structured profile in under a minute.</p>
+            <ul class="space-y-3 mt-8 text-sm">
+              <li class="flex items-center gap-3"><i data-icon="check-circle" class="w-5 h-5 text-[#9ee6c9] shrink-0"></i><span data-i18n="signup_p1">5 free credits — enough to feel the difference</span></li>
+              <li class="flex items-center gap-3"><i data-icon="check-circle" class="w-5 h-5 text-[#9ee6c9] shrink-0"></i><span data-i18n="signup_p2">CV parsing is always free</span></li>
+              <li class="flex items-center gap-3"><i data-icon="check-circle" class="w-5 h-5 text-[#9ee6c9] shrink-0"></i><span data-i18n="signup_p3">Delete your data anytime</span></li>
+            </ul>
+          </div>
+
+          <div class="bg-white text-ink rounded-[24px] p-6 sm:p-8 w-full max-w-md lg:justify-self-end shadow-[0_30px_60px_-30px_rgba(0,0,0,.6)]">
+            <h3 class="font-display text-2xl font-semibold" data-i18n="signup_form_title">Create your account</h3>
+            <p class="text-sm text-soft mt-1" data-i18n="signup_form_sub">Free forever plan. Upgrade only if you love it.</p>
+            <form id="signup-form" class="space-y-4 mt-6">
+              <div>
+                <label for="su-email" class="field-label" data-i18n="email">Email</label>
+                <input id="su-email" class="field" type="email" required autocomplete="email" inputmode="email" />
+              </div>
+              <div>
+                <label for="su-password" class="field-label" data-i18n="password">Password</label>
+                <input id="su-password" class="field" type="password" required minlength="8" autocomplete="new-password" aria-describedby="su-password-hint" />
+                <p id="su-password-hint" class="text-xs text-mute mt-1.5" data-i18n="password_hint">At least 8 characters</p>
+              </div>
+              <button id="signup-submit" type="submit" class="btn btn-primary btn-block !min-h-[50px]" data-i18n="signup_button">Create free account</button>
+            </form>
+            <div id="signup-message" class="hidden" role="alert"></div>
+            <p class="text-center text-sm text-soft mt-5">
+              <span data-i18n="signup_have">Already have an account?</span>
+              <a href="app.html" class="font-semibold text-iris hover:underline underline-offset-4" data-i18n="nav_signin">Sign in</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="max-w-6xl mx-auto px-4 sm:px-6 pb-10">
+    <div class="hairline mb-8"></div>
+    <div class="flex flex-wrap items-center justify-between gap-4 text-sm text-soft">
+      <a href="#" class="inline-flex items-center gap-2.5">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="font-display font-semibold text-ink">CareerForge</span>
+      </a>
+      <p data-i18n="footer_tag">Gulf + francophone first · EN · FR · AR</p>
+      <p class="font-mono text-xs">© 2026 CareerForge</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { CF_CONFIG } from './public/js/config.js';
+    import { hydrateIcons, icon } from './public/js/icons.js';
+
+    /* ─── Landing copy (English lives in the markup) ─── */
+    const L = {
+      fr: {
+        skip: 'Aller au contenu',
+        nav_features: 'Fonctionnalités', nav_how: 'Comment ça marche', nav_pricing: 'Tarifs', nav_faq: 'FAQ', nav_signin: 'Se connecter', nav_start: 'Commencer', nav_open: 'Mon espace',
+        hero_badge: 'Conçu pour le Golfe · English · Français · العربية',
+        hero_title_1: 'Ne corrigez pas seulement votre CV.', hero_title_2: 'Décrochez l’entretien.',
+        hero_sub: 'Importez votre CV une fois. CareerForge réécrit vos expériences avec l’IA, montre les mots-clés exacts recherchés par l’ATS de chaque offre, et prépare une candidature adaptée — dans la langue du recruteur.',
+        hero_cta: 'Commencer gratuitement — 5 crédits offerts', hero_cta2: 'Voir comment ça marche',
+        trust_1: 'Lu dans votre navigateur', trust_2: 'N’invente jamais de faits', trust_3: 'Analyse de CV toujours gratuite',
+        forge_parse: 'Analyse', forge_enhance: 'Optimisé', forge_kit: 'Kit',
+        cube_missing: 'Mot-clé manquant', cube_alert: '3 nouvelles offres à Dubaï',
+        demo_kicker: 'Un point, passé à la forge', demo_before_label: 'Avant', demo_after_label: 'Après',
+        demo_before: 'Aidé sur les rapports de ventes hebdo, préparation passée de 5 h à 2 h',
+        demo_after: 'Automatisé le reporting hebdomadaire des ventes, réduisant la préparation de 5 h à 2 h',
+        demo_ats: 'Score ATS', demo_keywords: 'Écart de mots-clés',
+        stat_1: 'crédit pour analyser votre CV — toujours gratuit', stat_2: 'langues : anglais, français, arabe', stat_3: 'marchés de l’emploi, de Dubaï à Paris', stat_4: 'crédits offerts à l’inscription — sans carte',
+        features_kicker: 'Tout au même endroit',
+        features_title: 'De « importé » à « embauché », chaque étape est couverte',
+        features_sub: 'Arrêtez de jongler entre cinq outils. Un seul profil alimente chaque optimisation, score et candidature.',
+        f_gulf_title: 'Format CV Golfe', f_gulf_desc: 'Les champs attendus par les recruteurs du Golfe — présentés comme ils les lisent.',
+        gulf_nat: 'Nationalité', gulf_nat_v: 'Égyptienne', gulf_visa: 'Statut de visa', gulf_visa_v: 'Visa de travail', gulf_notice: 'Préavis', gulf_notice_v: '30 jours', gulf_license: 'Permis de conduire', gulf_license_v: 'EAU · Automatique',
+        f_enh_title: 'Optimisation IA des points', f_enh_desc: 'Claude réécrit chaque point avec un verbe fort et un résultat clair. Il n’invente jamais d’employeurs, de chiffres ni de faits.',
+        f_enh_before: 'Travaillé sur l’onboarding des nouveaux clients', f_enh_after: 'Piloté l’onboarding des nouveaux clients grands comptes, du contrat à la mise en service',
+        f_enh_revert: 'Votre original est toujours conservé — réversible à tout moment.',
+        f_ats_title: 'Écart de mots-clés ATS', f_ats_desc: 'Un score explicable — et les mots-clés exacts qui vous manquent pour cette offre.',
+        f_lang_title: 'Sortie EN · FR · AR', f_lang_desc: 'Une vraie lettre de motivation, pas une traduction. L’arabe avec une mise en page de droite à gauche.',
+        f_kit_title: 'Kit de candidature en un clic', f_kit_desc: 'Quatre documents par offre, adaptés à la description et rédigés dans la langue du recruteur.',
+        kit_cv: 'Variante de CV adaptée', kit_letter: 'Lettre de motivation', kit_email: 'E-mail de relance', kit_linkedin: 'Message LinkedIn',
+        f_wa_title: 'Alertes emploi WhatsApp', f_wa_desc: 'Les offres arrivent là où vous regardez vraiment — chaque jour ou chaque semaine. L’e-mail est optionnel.',
+        wa_msg1: '3 nouvelles offres correspondent à votre profil', wa_msg2: 'Data Analyst · Dubaï', wa_msg3: '86 % de compatibilité · 18–22k AED',
+        how_kicker: 'Le parcours, étape par étape', how_title: 'Cinq étapes du CV à l’entretien',
+        how1_title: 'Importer', how1_desc: 'PDF ou DOCX, lu dans votre navigateur. Profil structuré en 30 secondes environ.',
+        how2_title: 'Optimiser', how2_desc: 'Verbes plus forts, résultats plus clairs — affichés à côté de votre original.',
+        how3_title: 'Cibler', how3_desc: 'Collez une offre. Voyez votre score et les mots-clés à ajouter.',
+        how4_title: 'Candidater', how4_desc: 'Générez le kit : CV, lettre, relance et message LinkedIn.',
+        how5_title: 'Suivre', how5_desc: 'Toutes vos candidatures sur un seul tableau — de l’enregistrement à l’offre.',
+        pricing_kicker: 'Des prix pensés pour la région', pricing_title: 'Commencez gratuitement. Passez Pro quand ça rapporte.',
+        plan_free: 'Gratuit', plan_free_1: '5 crédits à l’inscription', plan_free_2: 'Analyse de CV — toujours gratuite', plan_free_3: '1 optimisation + 1 score ATS + 1 kit', plan_free_cta: 'Essayer gratuitement',
+        plan_popular: 'Le plus populaire', plan_pro: 'Pro', per_month: '/mois',
+        plan_pro_1: 'Optimisations et scores ATS dans une large limite d’usage raisonnable', plan_pro_2: 'Kits de candidature pour chaque offre visée', plan_pro_3: 'Alertes emploi WhatsApp', plan_pro_4: 'CV Golfe + sortie trilingue', plan_pro_cta: 'Passer Pro',
+        plan_packs: 'Packs de crédits', plan_packs_price: 'À la carte', plan_packs_1: 'Sans abonnement', plan_packs_2: 'Les crédits n’expirent jamais', plan_packs_3: 'Idéal pour une recherche ponctuelle', plan_packs_cta: 'Acheter des crédits',
+        faq_title: 'Questions fréquentes',
+        faq1_q: 'Mes données de CV sont-elles privées ?', faq1_a: 'Oui. Votre fichier est lu dans votre navigateur, stocké dans un espace privé auquel vous seul accédez, et vous pouvez tout supprimer à tout moment.',
+        faq2_q: 'L’IA va-t-elle inventer des expériences ?', faq2_a: 'Jamais. L’optimiseur renforce vos propres mots — il lui est interdit d’inventer des chiffres, des employeurs ou des faits. Vos points d’origine sont toujours conservés.',
+        faq3_q: 'Le score ATS garantit-il de passer ?', faq3_a: 'Aucun outil ne peut le promettre. Notre score est une estimation — sa vraie valeur est la liste des mots-clés manquants qui vous dit exactement quoi corriger.',
+        faq4_q: 'Quels pays et langues sont pris en charge ?', faq4_a: 'Les offres couvrent les EAU, l’Arabie saoudite, le Qatar, l’Égypte, la France, le Royaume-Uni et les États-Unis. Chaque document peut être généré en anglais, français ou arabe — y compris au format CV Golfe.',
+        signup_title: 'Votre prochain entretien commence par un import.',
+        signup_sub: 'Créez votre compte gratuit — 5 crédits offerts, sans carte bancaire. Importez votre CV et voyez votre profil structuré en moins d’une minute.',
+        signup_p1: '5 crédits offerts — de quoi voir la différence', signup_p2: 'L’analyse de CV est toujours gratuite', signup_p3: 'Supprimez vos données à tout moment',
+        signup_form_title: 'Créez votre compte', signup_form_sub: 'Plan gratuit pour toujours. Passez Pro seulement si vous adorez.',
+        email: 'E-mail', password: 'Mot de passe', password_hint: 'Au moins 8 caractères',
+        signup_button: 'Créer un compte gratuit', signup_have: 'Déjà un compte ?',
+        footer_tag: 'Golfe + francophone d’abord · EN · FR · AR',
+        msg_check_email: 'Vérifiez votre e-mail pour confirmer votre compte, puis connectez-vous.',
+        msg_error: 'Une erreur est survenue. Veuillez réessayer.',
+        msg_not_configured: 'L’inscription n’est pas encore configurée.',
+        msg_network: 'Impossible de joindre le service d’inscription. Vérifiez votre connexion et réessayez dans un instant.',
+      },
+      ar: {
+        skip: 'انتقل إلى المحتوى',
+        nav_features: 'المميزات', nav_how: 'كيف يعمل', nav_pricing: 'الأسعار', nav_faq: 'الأسئلة', nav_signin: 'تسجيل الدخول', nav_start: 'ابدأ مجاناً', nav_open: 'مساحتي',
+        hero_badge: 'صُمم لمنطقة الخليج · English · Français · العربية',
+        hero_title_1: 'لا تكتفِ بتحسين سيرتك الذاتية.', hero_title_2: 'احصل على المقابلة.',
+        hero_sub: 'ارفع سيرتك الذاتية مرة واحدة. يعيد CareerForge صياغة خبراتك بالذكاء الاصطناعي، ويُظهر الكلمات المفتاحية التي يبحث عنها نظام ATS لكل وظيفة، ويجهّز طلباً مخصصاً — بلغة مسؤول التوظيف.',
+        hero_cta: 'ابدأ مجاناً — 5 أرصدة هدية', hero_cta2: 'شاهد كيف يعمل',
+        trust_1: 'يُقرأ داخل متصفحك', trust_2: 'لا يختلق أي حقائق', trust_3: 'تحليل السيرة مجاني دائماً',
+        forge_parse: 'تحليل', forge_enhance: 'تحسين', forge_kit: 'الحزمة',
+        cube_missing: 'كلمة ناقصة', cube_alert: '3 وظائف جديدة في دبي',
+        demo_kicker: 'نقطة واحدة تمر بالتحسين', demo_before_label: 'قبل', demo_after_label: 'بعد',
+        demo_before: 'ساعدت في تقارير المبيعات الأسبوعية، وقلّلت التحضير من 5 ساعات إلى ساعتين',
+        demo_after: 'أتمتة تقارير المبيعات الأسبوعية، مع تقليص وقت التحضير من 5 ساعات إلى ساعتين',
+        demo_ats: 'توافق ATS', demo_keywords: 'فجوة الكلمات المفتاحية',
+        stat_1: 'رصيد لتحليل سيرتك — مجاني دائماً', stat_2: 'لغات: الإنجليزية والفرنسية والعربية', stat_3: 'أسواق عمل، من دبي إلى باريس', stat_4: 'أرصدة مجانية عند التسجيل — بدون بطاقة',
+        features_kicker: 'كل شيء في مكان واحد',
+        features_title: 'من «الرفع» إلى «التوظيف»، كل خطوة مغطاة',
+        features_sub: 'توقف عن التنقل بين خمس أدوات. ملف واحد يغذّي كل تحسين وتقييم وطلب.',
+        f_gulf_title: 'صيغة السيرة الخليجية', f_gulf_desc: 'الحقول التي يتوقعها مسؤولو التوظيف في الخليج — بالترتيب الذي يقرؤونه.',
+        gulf_nat: 'الجنسية', gulf_nat_v: 'مصري', gulf_visa: 'حالة الإقامة', gulf_visa_v: 'تأشيرة عمل', gulf_notice: 'فترة الإشعار', gulf_notice_v: '30 يوماً', gulf_license: 'رخصة القيادة', gulf_license_v: 'الإمارات · أوتوماتيك',
+        f_enh_title: 'تحسين النقاط بالذكاء الاصطناعي', f_enh_desc: 'يعيد Claude صياغة كل نقطة بفعل قوي ونتيجة واضحة. لا يختلق جهات عمل أو أرقاماً أو حقائق.',
+        f_enh_before: 'عملت على استقبال العملاء الجدد', f_enh_after: 'قدت استقبال عملاء الشركات الجدد، من توقيع العقد حتى التشغيل',
+        f_enh_revert: 'نسختك الأصلية محفوظة دائماً — يمكنك التراجع في أي وقت.',
+        f_ats_title: 'فجوة كلمات ATS', f_ats_desc: 'درجة مفسَّرة — والكلمات المفتاحية الناقصة بالضبط لهذه الوظيفة.',
+        f_lang_title: 'إخراج بثلاث لغات', f_lang_desc: 'خطاب تحفيزي فرنسي حقيقي وليس ترجمة. وعربية باتجاه صحيح من اليمين إلى اليسار.',
+        f_kit_title: 'حزمة تقديم بنقرة واحدة', f_kit_desc: 'أربعة مستندات لكل وظيفة، مخصصة للوصف ومكتوبة بلغة مسؤول التوظيف.',
+        kit_cv: 'نسخة سيرة مخصصة', kit_letter: 'خطاب تحفيزي', kit_email: 'بريد متابعة', kit_linkedin: 'رسالة لينكدإن',
+        f_wa_title: 'تنبيهات وظائف واتساب', f_wa_desc: 'تصلك الوظائف حيث تنظر فعلاً — يومياً أو أسبوعياً. البريد الإلكتروني اختياري.',
+        wa_msg1: '3 وظائف جديدة تطابق ملفك اليوم', wa_msg2: 'محلل بيانات · دبي', wa_msg3: 'توافق 86% · 18–22 ألف درهم',
+        how_kicker: 'المسار خطوة بخطوة', how_title: 'خمس خطوات من السيرة إلى المقابلة',
+        how1_title: 'ارفع', how1_desc: 'ملف PDF أو DOCX يُقرأ في متصفحك. ملف منظم خلال 30 ثانية تقريباً.',
+        how2_title: 'حسّن', how2_desc: 'أفعال أقوى ونتائج أوضح — تُعرض بجانب نسختك الأصلية.',
+        how3_title: 'طابِق', how3_desc: 'الصق وظيفة. شاهد درجتك والكلمات التي عليك إضافتها.',
+        how4_title: 'قدّم', how4_desc: 'ولّد الحزمة: سيرة وخطاب وبريد متابعة ورسالة لينكدإن.',
+        how5_title: 'تابِع', how5_desc: 'كل طلباتك على لوحة واحدة — من الحفظ حتى العرض.',
+        pricing_kicker: 'أسعار تناسب المنطقة', pricing_title: 'ابدأ مجاناً. ترقَّ عندما يستحق الأمر.',
+        plan_free: 'مجاني', plan_free_1: '5 أرصدة عند التسجيل', plan_free_2: 'تحليل السيرة — مجاني دائماً', plan_free_3: 'تحسين + تقييم ATS + حزمة واحدة', plan_free_cta: 'جرّبه مجاناً',
+        plan_popular: 'الأكثر شيوعاً', plan_pro: 'برو', per_month: '/شهرياً',
+        plan_pro_1: 'تحسينات وتقييمات ATS ضمن حد استخدام عادل وسخي', plan_pro_2: 'حزم تقديم لكل وظيفة تستهدفها', plan_pro_3: 'تنبيهات وظائف واتساب', plan_pro_4: 'سيرة خليجية + إخراج ثلاثي اللغة', plan_pro_cta: 'اشترك في برو',
+        plan_packs: 'باقات الأرصدة', plan_packs_price: 'ادفع حسب الاستخدام', plan_packs_1: 'بدون اشتراك', plan_packs_2: 'الأرصدة لا تنتهي أبداً', plan_packs_3: 'مثالية لبحث وظيفي واحد', plan_packs_cta: 'اشترِ أرصدة',
+        faq_title: 'الأسئلة الشائعة',
+        faq1_q: 'هل بيانات سيرتي الذاتية خاصة؟', faq1_a: 'نعم. يُقرأ ملفك في متصفحك، ويُخزَّن في مساحة خاصة لا يصل إليها غيرك، ويمكنك حذف كل شيء في أي وقت.',
+        faq2_q: 'هل سيختلق الذكاء الاصطناعي خبرات لا أملكها؟', faq2_a: 'أبداً. المحسّن يقوّي صياغتك أنت — ويُمنع صراحةً من اختلاق أرقام أو جهات عمل أو حقائق. ونقاطك الأصلية محفوظة دائماً.',
+        faq3_q: 'هل تضمن درجة ATS اجتيازي؟', faq3_a: 'لا توجد أداة تضمن ذلك. درجتنا تقدير — قيمتها الحقيقية في قائمة الكلمات الناقصة التي تخبرك بالضبط بما يجب إصلاحه.',
+        faq4_q: 'ما الدول واللغات المدعومة؟', faq4_a: 'تغطي الوظائف الإمارات والسعودية وقطر ومصر وفرنسا وبريطانيا وأمريكا. ويمكن توليد كل مستند بالإنجليزية أو الفرنسية أو العربية — بما في ذلك صيغة السيرة الخليجية.',
+        signup_title: 'مقابلتك القادمة تبدأ برفع ملف واحد.',
+        signup_sub: 'أنشئ حسابك المجاني — 5 أرصدة هدية وبدون بطاقة. ارفع سيرتك وشاهد ملفك المنظم في أقل من دقيقة.',
+        signup_p1: '5 أرصدة مجانية — كافية لتلمس الفرق', signup_p2: 'تحليل السيرة مجاني دائماً', signup_p3: 'احذف بياناتك متى شئت',
+        signup_form_title: 'أنشئ حسابك', signup_form_sub: 'خطة مجانية للأبد. ترقَّ فقط إذا أعجبك.',
+        email: 'البريد الإلكتروني', password: 'كلمة المرور', password_hint: '8 أحرف على الأقل',
+        signup_button: 'أنشئ حساباً مجانياً', signup_have: 'لديك حساب بالفعل؟',
+        footer_tag: 'الخليج والفرنكوفونية أولاً · EN · FR · AR',
+        msg_check_email: 'تحقق من بريدك الإلكتروني لتأكيد حسابك، ثم سجّل الدخول.',
+        msg_error: 'حدث خطأ ما. يرجى المحاولة مرة أخرى.',
+        msg_not_configured: 'التسجيل غير مُعدّ بعد.',
+        msg_network: 'تعذّر الوصول إلى خدمة التسجيل. تحقق من اتصالك وحاول مجدداً بعد قليل.',
+      },
+    };
+    const EN_EXTRA = {
+      nav_open: 'Open workspace',
+      msg_check_email: 'Check your email to confirm your account, then sign in.',
+      msg_error: 'Something went wrong. Please try again.',
+      msg_not_configured: 'Signup is not configured yet.',
+      msg_network: 'We couldn’t reach the sign-up service. Check your connection and try again in a moment.',
+    };
+
+    hydrateIcons();
+
+    const enDefaults = { ...EN_EXTRA };
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      enDefaults[el.dataset.i18n] ??= el.textContent.trim();
+    });
+
+    let lang = 'en';
+    const tr = (key) => (L[lang] && L[lang][key]) || enDefaults[key] || key;
+
+    function setLang(next) {
+      lang = next;
+      document.documentElement.lang = next;
+      document.documentElement.dir = next === 'ar' ? 'rtl' : 'ltr';
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        el.textContent = tr(el.dataset.i18n);
+      });
+      document.querySelectorAll('.lang-btn').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === next)));
+    }
+    document.querySelectorAll('.lang-btn').forEach((btn) => btn.addEventListener('click', () => setLang(btn.dataset.lang)));
+
+    /* ─── Hero forge: pour on load ─── */
+    setTimeout(() => {
+      document.querySelectorAll('#hero-forge .tube-fill').forEach((f) => f.style.setProperty('--fill', f.dataset.fill));
+    }, 450);
+
+    /* ─── Scroll reveal ─── */
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-in');
+            io.unobserve(e.target);
+          }
+        }),
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+    /* ─── Supabase: signup + signed-in nav ─── */
+    const configured = Boolean(CF_CONFIG.SUPABASE_URL && CF_CONFIG.SUPABASE_ANON_KEY);
+    const sb = configured ? window.supabase.createClient(CF_CONFIG.SUPABASE_URL, CF_CONFIG.SUPABASE_ANON_KEY) : null;
+
+    if (sb) {
+      sb.auth.getSession().then(({ data }) => {
+        if (data?.session) {
+          const link = document.getElementById('nav-signin');
+          link.dataset.i18n = 'nav_open';
+          link.textContent = tr('nav_open');
+        }
+      });
+    }
+
+    function showMessage(text, kind = 'error') {
+      const el = document.getElementById('signup-message');
+      el.className = `alert alert-${kind}`;
+      el.innerHTML = icon(kind === 'error' ? 'alert' : 'info');
+      const span = document.createElement('span');
+      span.textContent = text;
+      el.appendChild(span);
+    }
+
+    document.getElementById('signup-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!sb) {
+        showMessage(tr('msg_not_configured'));
+        return;
+      }
+      const btn = document.getElementById('signup-submit');
+      btn.disabled = true;
+      btn.setAttribute('aria-busy', 'true');
+      try {
+        const { data, error } = await sb.auth.signUp({
+          email: document.getElementById('su-email').value.trim(),
+          password: document.getElementById('su-password').value,
+        });
+        if (error) throw error;
+        if (data.session) {
+          window.location.href = 'app.html#upload'; // straight into step 1
+        } else {
+          showMessage(tr('msg_check_email'), 'info');
+        }
+      } catch (err) {
+        console.error('signup failed:', err);
+        const network = err?.name === 'AuthRetryableFetchError' || err instanceof TypeError || /failed to fetch|networkerror|load failed/i.test(String(err?.message));
+        showMessage(network ? tr('msg_network') : err.message || tr('msg_error'));
+      } finally {
+        btn.disabled = false;
+        btn.setAttribute('aria-busy', 'false');
+      }
+    });
+  </script>
+</body>
+</html>

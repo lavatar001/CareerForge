@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareerForge — Growth &amp; Landing Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14100c; --ink-2:#1b1610; --ink-3:#241d15; --ink-4:#2e261c;
+    --ember:#ff6b2c; --ember-2:#ff8a4c; --gold:#e9a83c; --lime:#8fb339;
+    --cream:#f3ebdf; --paper:#efe6d6; --muted:#a99a85; --muted-2:#7d715f;
+    --line:rgba(243,235,223,.09); --line-2:rgba(243,235,223,.16);
+    --good:#86c06a; --warn:#e9a83c; --bad:#e0654a;
+    --font-d:"Fraunces",Georgia,serif; --font-b:"Archivo",system-ui,sans-serif; --font-m:"JetBrains Mono",monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink); color:var(--cream); font-family:var(--font-b);
+    font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(1100px 600px at 82% -8%, rgba(255,107,44,.10), transparent 60%),
+      radial-gradient(900px 500px at -8% 40%, rgba(233,168,60,.06), transparent 55%);
+    background-attachment:fixed;
+  }
+  ::selection{background:var(--ember);color:#1a1109}
+  a{color:var(--ember-2);text-decoration:none} a:hover{color:var(--gold)}
+
+  .wrap{display:grid;grid-template-columns:270px 1fr;max-width:1320px;margin:0 auto;min-height:100vh}
+  nav.side{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;padding:34px 22px 40px;border-right:1px solid var(--line);background:linear-gradient(180deg,var(--ink-2),rgba(20,16,12,.6))}
+  nav.side::-webkit-scrollbar{width:8px} nav.side::-webkit-scrollbar-thumb{background:var(--ink-4);border-radius:8px}
+  .brand{display:flex;align-items:center;gap:11px;margin-bottom:4px}
+  .brand .mark{width:34px;height:34px;border-radius:9px;background:conic-gradient(from 210deg,var(--ember),var(--gold),var(--ember-2),var(--ember));display:grid;place-items:center;font-family:var(--font-d);font-weight:700;color:#1a1008;font-size:19px;box-shadow:0 6px 20px -6px rgba(255,107,44,.6)}
+  .brand h1{font-family:var(--font-d);font-size:21px;font-weight:600;line-height:1}
+  .brand .sub{font-family:var(--font-m);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted-2);margin-top:5px}
+  .toc{margin-top:26px;list-style:none;display:flex;flex-direction:column;gap:1px}
+  .toc a{display:flex;gap:11px;align-items:baseline;color:var(--muted);font-size:13.5px;padding:9px 12px;border-radius:8px;border-left:2px solid transparent;transition:.18s}
+  .toc a .n{font-family:var(--font-m);font-size:11px;color:var(--muted-2);min-width:20px}
+  .toc a:hover{background:var(--ink-3);color:var(--cream)}
+  .toc a.active{background:linear-gradient(90deg,rgba(255,107,44,.14),transparent);color:var(--cream);border-left-color:var(--ember)}
+  .toc a.active .n{color:var(--ember)}
+  .side-foot{margin-top:24px;padding-top:16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted-2);line-height:1.6}
+
+  main{padding:56px 66px 120px;max-width:960px}
+  @media(max-width:1000px){
+    .wrap{grid-template-columns:1fr}
+    nav.side{position:static;height:auto;border-right:none;border-bottom:1px solid var(--line)}
+    .toc{flex-direction:row;flex-wrap:wrap;gap:6px}
+    .toc a{border-left:none;border-bottom:2px solid transparent;padding:7px 10px}
+    .toc a.active{border-left:none;border-bottom-color:var(--ember)}
+    main{padding:38px 22px 90px}
+  }
+
+  section{padding-top:34px;margin-top:34px;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:none;margin-top:12px}
+  .eyebrow{font-family:var(--font-m);font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ember);margin-bottom:12px}
+  h2{font-family:var(--font-d);font-size:34px;font-weight:600;line-height:1.1;letter-spacing:-.5px;margin-bottom:14px}
+  h3{font-family:var(--font-d);font-size:21px;font-weight:600;margin:26px 0 10px;color:var(--paper)}
+  p{margin-bottom:14px;color:#e4d9c8}
+  strong{color:var(--cream);font-weight:600}
+  em{color:var(--gold);font-style:italic}
+  .lead{font-size:18.5px;line-height:1.6;color:var(--paper);font-family:var(--font-d);font-weight:400}
+  code{font-family:var(--font-m);font-size:.85em;background:var(--ink-3);padding:2px 6px;border-radius:5px;color:var(--ember-2);border:1px solid var(--line)}
+
+  /* hero */
+  .hero h2{font-size:44px;margin:14px 0 16px}
+  .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .pill{font-family:var(--font-m);font-size:11.5px;padding:6px 13px;border-radius:20px;border:1px solid var(--line-2);color:var(--paper);background:var(--ink-2)}
+  .pill.hot{border-color:rgba(255,107,44,.4);color:var(--ember-2);background:rgba(255,107,44,.08)}
+
+  /* flow diagram */
+  .flow{margin:22px 0 8px}
+  .stage{display:grid;grid-template-columns:52px 1fr;gap:16px;position:relative;padding-bottom:20px}
+  .stage::before{content:"";position:absolute;left:25px;top:44px;bottom:-4px;width:2px;background:var(--line-2)}
+  .stage:last-child::before{display:none}
+  .stage .num{width:52px;height:52px;border-radius:14px;background:linear-gradient(160deg,var(--ink-3),var(--ink-2));border:1px solid var(--line-2);display:grid;place-items:center;font-family:var(--font-d);font-size:22px;font-weight:600;color:var(--gold);z-index:1}
+  .stage .body{padding-top:3px}
+  .stage h4{font-family:var(--font-d);font-size:17px;font-weight:600;color:var(--cream);margin-bottom:3px}
+  .stage p{font-size:14px;color:var(--muted);margin:0}
+  .stage .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .tg{font-family:var(--font-m);font-size:10px;letter-spacing:.5px;padding:3px 8px;border-radius:6px;text-transform:uppercase}
+  .tg.u{background:rgba(143,179,57,.12);color:var(--lime);border:1px solid rgba(143,179,57,.25)}
+  .tg.g{background:rgba(233,168,60,.12);color:var(--gold);border:1px solid rgba(233,168,60,.25)}
+  .tg.c{background:rgba(255,107,44,.12);color:var(--ember-2);border:1px solid rgba(255,107,44,.25)}
+  .tg.d{background:var(--ink-3);color:var(--muted);border:1px solid var(--line-2)}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:16px 0 6px;font-size:12.5px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:10px;height:10px;border-radius:3px}
+
+  /* landing concepts */
+  .concept{background:var(--ink-2);border:1px solid var(--line);border-radius:16px;padding:26px;margin:20px 0;position:relative;overflow:hidden}
+  .concept::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:linear-gradient(var(--ember),var(--gold))}
+  .concept .cnum{font-family:var(--font-m);font-size:12px;letter-spacing:2px;color:var(--ember);text-transform:uppercase}
+  .concept h3{margin:6px 0 2px;font-size:26px;color:var(--cream)}
+  .concept .angle{font-size:13.5px;color:var(--gold);font-family:var(--font-m);margin-bottom:14px}
+  .concept .hl{font-family:var(--font-d);font-size:23px;line-height:1.2;color:var(--paper);margin:14px 0 4px}
+  .concept .sub{font-size:15px;color:var(--muted);margin-bottom:14px}
+  .metarow{display:flex;flex-wrap:wrap;gap:18px;margin:14px 0;font-size:13px}
+  .metarow div{flex:1;min-width:150px}
+  .metarow .k{font-family:var(--font-m);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted-2);margin-bottom:4px}
+  .metarow .v{color:#e4d9c8;font-size:13.5px}
+  .sections{list-style:none;padding:0;margin:8px 0;display:flex;flex-wrap:wrap;gap:6px}
+  .sections li{font-size:12px;font-family:var(--font-m);background:var(--ink-3);border:1px solid var(--line);padding:4px 10px;border-radius:7px;color:var(--paper)}
+  .prompt-box{background:#0e0b08;border:1px solid var(--line-2);border-radius:12px;padding:18px 20px;margin:14px 0 4px;font-family:var(--font-m);font-size:12.5px;line-height:1.75;color:#cdbfa8;position:relative}
+  .prompt-box .lbl{position:absolute;top:0;right:0;background:var(--gold);color:#1a1008;font-size:9.5px;letter-spacing:1.5px;padding:3px 10px;border-radius:0 11px 0 10px;text-transform:uppercase;font-weight:700}
+  .prompt-box b{color:var(--gold);font-weight:500}
+  .cta-chip{display:inline-block;margin-top:6px;font-family:var(--font-m);font-size:12px;color:var(--ember-2);border:1px dashed rgba(255,107,44,.4);border-radius:8px;padding:5px 12px}
+
+  /* angles */
+  .angle-item{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .angle-item:last-child{border-bottom:none}
+  .angle-item .idx{font-family:var(--font-d);font-size:26px;font-weight:600;color:var(--ember);line-height:1}
+  .angle-item h4{font-size:16px;color:var(--cream);margin-bottom:4px;font-family:var(--font-d);font-weight:600}
+  .angle-item .hook{font-style:italic;color:var(--gold);font-family:var(--font-d);font-size:16px;margin-bottom:6px}
+  .angle-item p{font-size:13.5px;color:var(--muted);margin:0}
+  .angle-item .lever{font-family:var(--font-m);font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted-2)}
+
+  /* posts */
+  .post{background:var(--ink-2);border:1px solid var(--line);border-radius:13px;padding:20px 22px;margin:14px 0}
+  .post .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+  .post .fmt{font-family:var(--font-m);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ember);border:1px solid rgba(255,107,44,.3);padding:3px 9px;border-radius:20px;white-space:nowrap}
+  .post .pidx{font-family:var(--font-d);font-size:14px;color:var(--muted-2)}
+  .post .hook{font-family:var(--font-d);font-size:20px;font-weight:600;color:var(--cream);line-height:1.25;margin-bottom:8px}
+  .post .beat{font-size:14px;color:#e4d9c8;margin-bottom:8px}
+  .post .payoff{font-size:13px;color:var(--muted)}
+  .post .payoff b{color:var(--gold);font-weight:500}
+
+  .callout{border-left:3px solid var(--gold);background:linear-gradient(90deg,rgba(233,168,60,.1),transparent);padding:15px 20px;border-radius:0 12px 12px 0;margin:18px 0}
+  .callout .tag{font-family:var(--font-m);font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px}
+  .foot{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;color:var(--muted-2)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="side">
+    <div class="brand">
+      <div class="mark">C</div>
+      <div><h1>CareerForge</h1><div class="sub">Growth &amp; Landing Kit</div></div>
+    </div>
+    <ul class="toc">
+      <li><a href="#flow"><span class="n">01</span> The Flow (visual)</a></li>
+      <li><a href="#landing"><span class="n">02</span> 3 Landing Concepts</a></li>
+      <li><a href="#angles"><span class="n">03</span> 10 Marketing Angles</a></li>
+      <li><a href="#posts"><span class="n">04</span> 10 Social Posts</a></li>
+    </ul>
+    <div class="side-foot">Companion to the Build Blueprint &amp; CLAUDE.md. Nano Banana prompts are paste-ready for Gemini image generation.</div>
+  </nav>
+
+  <main>
+
+    <div class="hero">
+      <div class="eyebrow">Marketing &amp; Design · CareerForge</div>
+      <h2>The flow, the pages,<br>the angles, the posts.</h2>
+      <p class="lead">A visual walkthrough of how a raw CV becomes a sent application — plus three landing-page directions with ready-to-paste Nano Banana prompts, ten marketing angles, and ten scroll-stopping social posts.</p>
+      <div class="pills">
+        <span class="pill hot">Gulf + francophone wedge</span>
+        <span class="pill">Nano Banana prompts</span>
+        <span class="pill">Faceless short-form ready</span>
+      </div>
+    </div>
+
+    <!-- 01 FLOW -->
+    <section id="flow">
+      <div class="eyebrow">01 — How it works</div>
+      <h2>One profile, twelve stages</h2>
+      <p>Everything is a read or write against a single <strong>Profile JSON</strong>. Colour tells you who's doing the work at each stage.</p>
+
+      <div class="legend">
+        <span><span class="dot" style="background:var(--lime)"></span> User action</span>
+        <span><span class="dot" style="background:var(--gold)"></span> Gemini (cheap workhorse)</span>
+        <span><span class="dot" style="background:var(--ember)"></span> Claude (quality pen)</span>
+        <span><span class="dot" style="background:var(--muted)"></span> System / data</span>
+      </div>
+
+      <div class="flow">
+        <div class="stage"><div class="num">1</div><div class="body">
+          <h4>Land &amp; sign up</h4>
+          <p>Visitor converts on an outcome CTA, creates an account, and is granted 5 free credits.</p>
+          <div class="tags"><span class="tg u">User</span><span class="tg d">Supabase Auth</span><span class="tg d">+5 credits</span></div>
+        </div></div>
+
+        <div class="stage"><div class="num">2</div><div class="body">
+          <h4>Upload CV</h4>
+          <p>PDF/DOCX text is extracted <em>in the browser</em> (pdf.js / mammoth). The raw file never touches an AI.</p>
+          <div class="tags"><span class="tg u">User</span><span class="tg d">Client-side extract</span></div>
+        </div></div>
+
+        <div class="stage"><div class="num">3</div><div class="body">
+          <h4>Parse → Profile JSON</h4>
+          <p><code>/api/parse</code> turns the text into the canonical profile and saves it. Free, because it's cheap.</p>
+          <div class="tags"><span class="tg g">Gemini Flash-Lite</span><span class="tg d">writes profiles</span></div>
+        </div></div>
+
+        <div class="stage"><div class="num">4</div><div class="body">
+          <h4>Review &amp; edit</h4>
+          <p>Editable profile with a completeness score. Edits write straight to Supabase — RLS keeps it private.</p>
+          <div class="tags"><span class="tg u">User</span><span class="tg d">Direct DB write</span></div>
+        </div></div>
+
+        <div class="stage"><div class="num">5</div><div class="body">
+          <h4>Enhance <span style="color:var(--muted-2);font-size:13px">— 1 credit</span></h4>
+          <p>Bullets rewritten with strong verbs + metrics. Returns a revertible before/after diff.</p>
+          <div class="tags"><span class="tg c">Claude Sonnet</span><span class="tg d">keeps raw_bullets</span></div>
+        </div></div>
+
+        <div class="stage"><div class="num">6</div><div class="body">
+          <h4>ATS score <span style="color:var(--muted-2);font-size:13px">— 1 credit</span></h4>
+          <p>Paste a JD → 0–100 score. The <em>missing-keywords list</em> is the real product, not the number.</p>
+          <div class="tags"><span class="tg g">Gemini (keywords)</span><span class="tg d">deterministic score</span></div>
+        </div></div>
+
+        <div class="stage"><div class="num">7</div><div class="body">
+          <h4>Match jobs</h4>
+          <p>JSearch pulls live listings (<code>ae</code>, <code>fr</code>…) + salary ranges; Gemini fit-scores each vs the profile.</p>
+          <div class="tags"><span class="tg d">JSearch</span><span class="tg g">Gemini Flash</span></div>
+        </div></div>
+
+        <div class="stage"><div class="num">8</div><div class="body">
+          <h4>Application Kit <span style="color:var(--muted-2);font-size:13px">— 3 credits</span></h4>
+          <p>One call → tailored CV + motivation letter + follow-up email + LinkedIn msg, all consistent.</p>
+          <div class="tags"><span class="tg c">Claude Sonnet</span><span class="tg d">FR lettre path</span></div>
+        </div></div>
+
+        <div class="stage"><div class="num">9</div><div class="body">
+          <h4>Export</h4>
+          <p>ATS-safe single-column templates → PDF. Gulf toggle surfaces nationality / visa / licence fields.</p>
+          <div class="tags"><span class="tg d">Print-CSS PDF</span><span class="tg d">Gulf template</span></div>
+        </div></div>
+
+        <div class="stage"><div class="num">10</div><div class="body">
+          <h4>Apply &amp; track</h4>
+          <p>Chrome extension autofills the form from the profile, then auto-logs it into the kanban tracker.</p>
+          <div class="tags"><span class="tg u">User</span><span class="tg d">Extension → applications</span></div>
+        </div></div>
+
+        <div class="stage"><div class="num">11</div><div class="body">
+          <h4>WhatsApp alerts</h4>
+          <p>A cron searches JSearch per user and pushes new matches to WhatsApp — where MENA actually reads.</p>
+          <div class="tags"><span class="tg d">Vercel Cron</span><span class="tg d">Twilio WhatsApp</span></div>
+        </div></div>
+
+        <div class="stage"><div class="num">12</div><div class="body">
+          <h4>Interview prep + upgrade <span style="color:var(--muted-2);font-size:13px">— 2 credits</span></h4>
+          <p>Questions from the JD + STAR answers from real experience. Out of credits → Pro or a credit pack.</p>
+          <div class="tags"><span class="tg c">Claude Sonnet</span><span class="tg d">Payment webhook</span></div>
+        </div></div>
+      </div>
+
+      <div class="callout">
+        <span class="tag">The loop</span>
+        Every finished application feeds the tracker, every alert feeds a new search, and every credit spent is a reason to upgrade. That's the retention engine.
+      </div>
+    </section>
+
+    <!-- 02 LANDING -->
+    <section id="landing">
+      <div class="eyebrow">02 — Landing pages</div>
+      <h2>Three directions to test</h2>
+      <p>Each is a distinct <em>angle</em>, not just a different colour. Ship all three as variants, send traffic, keep the winner. Every Nano Banana prompt is written to render the exact headline text (Nano Banana handles in-image text well) — paste straight into Gemini image generation, 16:9 for the hero.</p>
+
+      <!-- Concept 1 -->
+      <div class="concept">
+        <div class="cnum">Concept 01</div>
+        <h3>The ATS X-Ray</h3>
+        <div class="angle">Angle · fear + clarity · "see what the robot sees"</div>
+        <div class="hl">Your CV was rejected in 6 seconds by a robot you never met.</div>
+        <div class="sub">Upload it. See exactly which keywords the ATS is missing — and fix them before you apply.</div>
+        <div class="metarow">
+          <div><div class="k">Targets</div><div class="v">Frustrated applicants getting silence; ATS-anxious professionals</div></div>
+          <div><div class="k">Primary CTA</div><div class="v">"Scan my CV free"</div></div>
+        </div>
+        <ul class="sections">
+          <li>Hero + scan</li><li>Live ATS-gap demo</li><li>Before/after bullet</li><li>3-step how</li><li>Proof (+7.8% offers)</li><li>Pricing</li><li>FAQ</li>
+        </ul>
+        <div class="prompt-box"><span class="lbl">Nano Banana prompt</span>
+        <b>Prompt:</b> A cinematic dark UI hero image, 16:9. A single paper résumé floating on a deep charcoal background, being scanned top-to-bottom by a thin glowing amber-orange light beam like a photocopier. Where the beam passes, keywords light up: some highlighted in warm green ("passed"), several circled in red ("missing"). A subtle floating scorecard panel on the right reads "ATS MATCH 62%" in a clean monospace font. Volumetric light, fine grain texture, high contrast, premium fintech aesthetic. Warm ember + gold accents on near-black. Render the headline text at top-left, bold serif, cream color: <b>"Rejected in 6 seconds."</b> Leave clean negative space for a subheadline. Photorealistic product-render style, sharp focus.
+        </div>
+        <span class="cta-chip">Vibe: technical · scary-then-reassuring · dark</span>
+      </div>
+
+      <!-- Concept 2 -->
+      <div class="concept">
+        <div class="cnum">Concept 02</div>
+        <h3>Built for the Gulf</h3>
+        <div class="angle">Angle · belonging + regional pride · your moat, front and centre</div>
+        <div class="hl">Job tools are built for America. This one is built for the Gulf.</div>
+        <div class="sub">Bilingual EN/AR CVs, Gulf format, UAE–KSA–Qatar jobs, and alerts in your WhatsApp. Priced in dirhams.</div>
+        <div class="metarow">
+          <div><div class="k">Targets</div><div class="v">Gulf expats + nationals; anyone job-hunting in UAE/KSA/Qatar</div></div>
+          <div><div class="k">Primary CTA</div><div class="v">"Build my Gulf CV"</div></div>
+        </div>
+        <ul class="sections">
+          <li>Hero (EN/AR CV)</li><li>Gulf-format callout</li><li>WhatsApp alerts</li><li>Job feed by city</li><li>AED pricing</li><li>Local testimonials</li>
+        </ul>
+        <div class="prompt-box"><span class="lbl">Nano Banana prompt</span>
+        <b>Prompt:</b> An elegant hero image, 16:9, warm and premium. A polished résumé shown twice side by side on a soft sandstone-beige surface: the left copy in English, the right copy in Arabic (right-to-left), both sharing the same clean single-column layout with a small professional headshot placeholder and neat "Nationality / Visa Status" fields visible. Soft golden-hour light from the right, gentle shadows, a faint out-of-focus modern Gulf skyline (Dubai/Doha towers) in the deep background bokeh. Sophisticated, aspirational, editorial. Ember-orange and gold accents. Render a bold cream serif headline across the top: <b>"Built for the Gulf."</b> Refined, calm, high-end. Photorealistic, shallow depth of field.
+        </div>
+        <span class="cta-chip">Vibe: warm · premium · proud · bilingual</span>
+      </div>
+
+      <!-- Concept 3 -->
+      <div class="concept">
+        <div class="cnum">Concept 03</div>
+        <h3>One click, whole application</h3>
+        <div class="angle">Angle · speed + all-in-one · kill the 4-subscription stack</div>
+        <div class="hl">One CV in. A full application out.</div>
+        <div class="sub">Tailored résumé, motivation letter, follow-up email and LinkedIn message — generated together, so they never contradict each other.</div>
+        <div class="metarow">
+          <div><div class="k">Targets</div><div class="v">High-volume applicants; people tired of copy-pasting across tools</div></div>
+          <div><div class="k">Primary CTA</div><div class="v">"Generate my kit"</div></div>
+        </div>
+        <ul class="sections">
+          <li>Hero (kit fan-out)</li><li>"Replace the stack" table</li><li>Speed demo (60s)</li><li>Consistency angle</li><li>Pricing vs stack</li><li>CTA</li>
+        </ul>
+        <div class="prompt-box"><span class="lbl">Nano Banana prompt</span>
+        <b>Prompt:</b> A dynamic hero image, 16:9. A single glowing résumé document at the left transforming into a fanned-out arc of four crisp documents flying to the right — labelled subtly as a tailored CV, a cover letter, an email, and a LinkedIn message — like cards dealt from one deck. Motion trails of warm amber sparks connect them, suggesting one source becoming many. Deep near-black background with a soft ember gradient glow behind the fan. Clean, modern, energetic, product-launch feel. Gold and orange accents on dark. Render a bold cream serif headline lower-left: <b>"One CV in. A full application out."</b> Sharp, high-contrast, premium SaaS aesthetic, subtle grain.
+        </div>
+        <span class="cta-chip">Vibe: kinetic · product-forward · confident</span>
+      </div>
+
+      <div class="callout">
+        <span class="tag">Prompt tips</span>
+        Nano Banana renders in-image text well but can misspell on long strings — keep rendered headlines short (done above) and add the subheadline as real HTML over the image, not baked in. Ask for <code>16:9</code> for hero, <code>1:1</code> for social crops, and regenerate 3–4 times to cherry-pick.
+      </div>
+    </section>
+
+    <!-- 03 ANGLES -->
+    <section id="angles">
+      <div class="eyebrow">03 — Positioning</div>
+      <h2>Ten marketing angles</h2>
+      <p>Each pairs a one-line hook with the psychological lever it pulls and where it fits.</p>
+
+      <div class="angle-item"><div class="idx">1</div><div>
+        <h4>The 6-second rejection</h4>
+        <div class="hook">"Rejected in 6 seconds by a robot you never met."</div>
+        <p><span class="lever">Lever: fear + injustice.</span> The ~75% ATS-rejection stat weaponised. Highest-converting hook in the niche. → paid ads, TikTok.</p>
+      </div></div>
+
+      <div class="angle-item"><div class="idx">2</div><div>
+        <h4>Built for the Gulf</h4>
+        <div class="hook">"Job tools are built for America. This one is built for the Gulf."</div>
+        <p><span class="lever">Lever: belonging.</span> Your defensible moat. Owns a market incumbents ignore. → landing, LinkedIn, local press.</p>
+      </div></div>
+
+      <div class="angle-item"><div class="idx">3</div><div>
+        <h4>The lettre de motivation</h4>
+        <div class="hook">"Une lettre de motivation qui ne sent pas la traduction Google."</div>
+        <p><span class="lever">Lever: cultural authenticity.</span> English-first tools botch it; you don't. → francophone channels, Le CYCLE cross-promo.</p>
+      </div></div>
+
+      <div class="angle-item"><div class="idx">4</div><div>
+        <h4>The AED 500 alternative</h4>
+        <div class="hook">"AED 500 for one CV rewrite? Or unlimited for AED 45 a month."</div>
+        <p><span class="lever">Lever: price anchoring.</span> Undercut Dubai's human CV writers 10×. → search ads on "CV writing Dubai".</p>
+      </div></div>
+
+      <div class="angle-item"><div class="idx">5</div><div>
+        <h4>Outcome, not document</h4>
+        <div class="hook">"Stop building resumes. Start getting interviews."</div>
+        <p><span class="lever">Lever: reframing.</span> Separates you from every "builder". The brand's spine. → homepage headline.</p>
+      </div></div>
+
+      <div class="angle-item"><div class="idx">6</div><div>
+        <h4>Kill the stack</h4>
+        <div class="hook">"You don't need 4 subscriptions. You need one."</div>
+        <p><span class="lever">Lever: simplicity + savings.</span> Names the $60–100/mo tab of stitching Teal + Rezi + Jobscan. → comparison page.</p>
+      </div></div>
+
+      <div class="angle-item"><div class="idx">7</div><div>
+        <h4>Coffee-cold speed</h4>
+        <div class="hook">"Five tailored applications before your coffee goes cold."</div>
+        <p><span class="lever">Lever: effort collapse.</span> Sells the batch/Application-Kit magic. → demo video, Reels.</p>
+      </div></div>
+
+      <div class="angle-item"><div class="idx">8</div><div>
+        <h4>Jobs in your WhatsApp</h4>
+        <div class="hook">"Job alerts in your WhatsApp — not your spam folder."</div>
+        <p><span class="lever">Lever: channel truth (MENA).</span> A regionally obvious unlock nobody else offers. → Gulf landing, retention.</p>
+      </div></div>
+
+      <div class="angle-item"><div class="idx">9</div><div>
+        <h4>The tailoring truth</h4>
+        <div class="hook">"Same CV to 50 jobs is why you hear nothing back."</div>
+        <p><span class="lever">Lever: pattern interrupt.</span> Names the mistake, then sells per-job tailoring. → carousels, threads.</p>
+      </div></div>
+
+      <div class="angle-item"><div class="idx">10</div><div>
+        <h4>The contradiction catch</h4>
+        <div class="hook">"Your CV and cover letter are contradicting each other. Recruiters notice."</div>
+        <p><span class="lever">Lever: insider secret.</span> Justifies the "one source, consistent kit" feature. → LinkedIn, email.</p>
+      </div></div>
+    </section>
+
+    <!-- 04 POSTS -->
+    <section id="posts">
+      <div class="eyebrow">04 — Content</div>
+      <h2>Ten social posts, hooks first</h2>
+      <p>Built for faceless short-form (TikTok/Reels/Shorts) and carousels — your AI-video pipeline's home turf. The hook is the first line on screen; it earns the next 2 seconds.</p>
+
+      <div class="post">
+        <div class="top"><span class="pidx">Post 01</span><span class="fmt">Reel · 15s</span></div>
+        <div class="hook">"3 words silently killing your CV."</div>
+        <div class="beat">Reveal them one by one on screen: <em>"Responsible for" · "Worked on" · "Helped with."</em> Show each replaced by a punchy metric bullet.</div>
+        <div class="payoff"><b>CTA:</b> "Comment 'FIX' and I'll show you the swap." → drives DMs + comments.</div>
+      </div>
+
+      <div class="post">
+        <div class="top"><span class="pidx">Post 02</span><span class="fmt">Reel · before/after</span></div>
+        <div class="hook">"I ran my own CV through the tool. It was brutal."</div>
+        <div class="beat">Split-screen glow-up: weak bullets on the left, enhanced metric-rich bullets on the right, ATS score jumping 54 → 89.</div>
+        <div class="payoff"><b>CTA:</b> "Try yours free — link in bio." Proof + product in one.</div>
+      </div>
+
+      <div class="post">
+        <div class="top"><span class="pidx">Post 03</span><span class="fmt">Screen-record · 20s</span></div>
+        <div class="hook">"This is what the ATS actually sees when it reads your CV."</div>
+        <div class="beat">Show the scan animation stripping formatting, missing keywords flashing red. Visceral "oh no" moment.</div>
+        <div class="payoff"><b>CTA:</b> "Scan yours in 30 seconds." The fear hook in motion.</div>
+      </div>
+
+      <div class="post">
+        <div class="top"><span class="pidx">Post 04</span><span class="fmt">Carousel · 6 slides</span></div>
+        <div class="hook">"POV: you're an expat applying in Dubai — and your CV is missing THIS."</div>
+        <div class="beat">Slides walk through the Gulf-format fields (nationality, visa status, driving licence, photo) Western templates omit.</div>
+        <div class="payoff"><b>CTA:</b> "Build a proper Gulf CV — link in bio." Owns the regional angle.</div>
+      </div>
+
+      <div class="post">
+        <div class="top"><span class="pidx">Post 05</span><span class="fmt">Reel · 60s demo</span></div>
+        <div class="hook">"Watch me turn one CV into a full job application in 60 seconds."</div>
+        <div class="beat">Real-time: upload → enhance → pick a job → generate kit → export. Timer ticking in the corner.</div>
+        <div class="payoff"><b>CTA:</b> "The whole thing is free to try." Speed = the wow.</div>
+      </div>
+
+      <div class="post">
+        <div class="top"><span class="pidx">Post 06</span><span class="fmt">Talking-head / avatar</span></div>
+        <div class="hook">"Recruiters spend 6 seconds on your CV. Here's exactly where they look."</div>
+        <div class="beat">Overlay a heatmap on a sample CV — top third, job titles, dates. Explain what to put where.</div>
+        <div class="payoff"><b>CTA:</b> "Get the layout right automatically." Educational + authority.</div>
+      </div>
+
+      <div class="post">
+        <div class="top"><span class="pidx">Post 07</span><span class="fmt">Reel · FR</span></div>
+        <div class="hook">"L'erreur de lettre de motivation que font 90% des candidats."</div>
+        <div class="beat">Show the generic "Je suis motivé…" opener vs a specific, employer-focused one. French audience, Le CYCLE cross-post.</div>
+        <div class="payoff"><b>CTA:</b> "Génère la tienne en 30 secondes." Francophone wedge.</div>
+      </div>
+
+      <div class="post">
+        <div class="top"><span class="pidx">Post 08</span><span class="fmt">Carousel · 5 slides</span></div>
+        <div class="hook">"Same CV. 50 applications. 0 replies. Here's the fix."</div>
+        <div class="beat">Slide 1 the pain, slides 2–4 why tailoring beats spraying, slide 5 the one-click kit.</div>
+        <div class="payoff"><b>CTA:</b> "Tailor every application — link in bio." Names the mistake, sells the cure.</div>
+      </div>
+
+      <div class="post">
+        <div class="top"><span class="pidx">Post 09</span><span class="fmt">Reel · listicle</span></div>
+        <div class="hook">"5 power verbs that make a recruiter stop scrolling."</div>
+        <div class="beat">Rapid cuts: Spearheaded · Drove · Cut · Scaled · Launched — each with a real bullet example.</div>
+        <div class="payoff"><b>CTA:</b> "The tool rewrites your bullets this way." Saveable = shareable.</div>
+      </div>
+
+      <div class="post">
+        <div class="top"><span class="pidx">Post 10</span><span class="fmt">Reel · myth-bust</span></div>
+        <div class="hook">"Your cover letter and CV are contradicting each other — and recruiters notice."</div>
+        <div class="beat">Show two docs with mismatched dates/titles side by side, then the kit generating both from one profile.</div>
+        <div class="payoff"><b>CTA:</b> "One source, zero contradictions." The consistency selling point.</div>
+      </div>
+
+      <div class="callout">
+        <span class="tag">Posting playbook</span>
+        Seed 8–10 of these <strong>two weeks before launch</strong> so there's a trail when people search you. Recycle each hook across TikTok, Reels, and Shorts. Pin the 60-second demo (Post 05). Every caption ends with the same bio CTA — consistency compounds.
+      </div>
+    </section>
+
+    <div class="foot">
+      CareerForge Growth &amp; Landing Kit · Companion to the Build Blueprint and CLAUDE.md · Nano Banana prompts are for Gemini image generation and may need 3–4 regenerations to cherry-pick. Adapt hooks to each platform's native tone.
+    </div>
+
+  </main>
+</div>
+
+<script>
+  const links=[...document.querySelectorAll('.toc a')];
+  const map=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const a=map.get(e.target.id);if(a)a.classList.add('active');}});},{rootMargin:'-20% 0px -70% 0px',threshold:0});
+  document.querySelectorAll('section').forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
