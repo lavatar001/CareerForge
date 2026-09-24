@@ -1,0 +1,12 @@
+# Keep non-site files out of the Vercel deployment (served root is the repo root).
+.claude/
+.playwright-mcp/
+sql/
+dev-server.js
+CLAUDE.md
+README.md
+CareerForge-Blueprint.html
+CareerForge-Growth-Kit.html
+.env*
+!.env.example
+*.jpg
